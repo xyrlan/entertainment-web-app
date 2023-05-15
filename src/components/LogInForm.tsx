@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { loginSchema } from '@/domain/models/signUpSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 type LoginFormData = {
     email: string;
@@ -10,6 +11,8 @@ type LoginFormData = {
 };
 
 export default function LogInForm() {
+
+    const [ isLogin, setLogin ] = useState(false)
 
     const router = useRouter()
 
@@ -24,12 +27,14 @@ export default function LogInForm() {
         const savedPassword = localStorage.getItem('password');
         if (data.email === savedEmail && data.password === savedPassword) {
             // redirecionar para a página de sucesso de login
-            router.push('/dashboard');
+            setLogin(true);
+            router.push('/');
         } else {
             // mostrar mensagem de erro
             alert('Email ou senha incorretos');
         }
 
+ 
     
     };
 
@@ -40,7 +45,7 @@ export default function LogInForm() {
                 <input
                     autoComplete="off"
                     placeholder="Email"
-                    className={`w-full focus:outline-none bg-transparent p-2 border-b select-none ${errors.email ? 'border-b-red' : 'border-b-white'}`}
+                    className={`w-full focus:outline-none bg-transparent p-2 border-b select-none caret-red ${errors.email ? 'border-b-red' : 'border-b-white'}`}
                     id="email" {...register("email")} />
 
                 <span className='absolute right-0 p-2 text-red select-none'>
@@ -51,7 +56,7 @@ export default function LogInForm() {
             <div className='relative'>
                 <input
                     placeholder="Password"
-                    className={`w-full focus:outline-none bg-transparent p-2 border-b ${errors.password ? 'border-b-red' : 'border-b-white'}`}
+                    className={`w-full focus:outline-none bg-transparent p-2 border-b caret-red ${errors.password ? 'border-b-red' : 'border-b-white'}`}
                     id="password"
                     type="password" {...register("password")} />
                 <span className='absolute right-0 p-2 text-red select-none'>
@@ -59,7 +64,7 @@ export default function LogInForm() {
                 </span>
             </div>
 
-            <button className="w-full h-12 bg-red rounded-lg text-base" type="submit">
+            <button className="w-full h-12 bg-red rounded-lg text-base hover:bg-white hover:text-dark-blue" type="submit">
                 Login to your account
             </button>
         </form>

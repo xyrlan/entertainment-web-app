@@ -1,12 +1,26 @@
+"use client"
 import Image from 'next/image'
-import LoginSign from '@/components/loginSign'
-import SignUp from '@/app/signup/page'
+import Link from 'next/link'
+import Head from 'next/head';
+
+import Navbar from '@/components/Navbar';
+import UserIcon from '@/components/userIcon';
+
 
 
 export default function Home() {
+
+
+
+
   return (
+    <>
+      <main className='text-white'>
 
-  <div></div>
+        <Navbar />
 
+        
+      </main>
+    </>
   )
 }

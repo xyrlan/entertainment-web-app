@@ -3,6 +3,8 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema } from '@/domain/models/signUpSchema';
+import React from 'react';
+
 
 
 import LoginButton from './loginButton';
@@ -26,10 +28,13 @@ export default function SignUpForm() {
 
   const onSubmit = (data: SignUpFormData) => {
     // TODO: enviar os dados para o servidor e salvar no banco de dados
+
     localStorage.setItem('email', data.email);
     localStorage.setItem('password', data.password);
     console.log(data);
-
+    const email = localStorage.email;
+    const name = email.split('@')[0];
+    localStorage.setItem('name', name);
     // redirecionar para a página de Login
     router.push('/login');
   };
@@ -45,7 +50,7 @@ export default function SignUpForm() {
         <input
           autoComplete="off"
           placeholder="Email"
-          className={`w-full focus:outline-none bg-transparent p-2 border-b select-none ${errors.email ? 'border-b-red' : 'border-b-white'}`}
+          className={`w-full focus:outline-none bg-transparent p-2 border-b caret-red ${errors.email ? 'border-b-red' : 'border-b-white'}`}
           id="email" {...register("email")} />
 
         <span className='absolute right-0 p-2 text-red select-none'>
@@ -57,7 +62,7 @@ export default function SignUpForm() {
       <div className='relative'>
         <input
           placeholder="Password"
-          className={`w-full focus:outline-none bg-transparent p-2 border-b ${errors.password ? 'border-b-red' : 'border-b-white'}`}
+          className={`w-full focus:outline-none bg-transparent p-2 border-b caret-red ${errors.password ? 'border-b-red' : 'border-b-white'}`}
           id="password"
           type="password" {...register("password")} />
         <span className='absolute right-0 p-2 text-red select-none'>
@@ -69,7 +74,7 @@ export default function SignUpForm() {
       <div className='relative'>
         <input
           placeholder="Repeat password"
-          className={`w-full focus:outline-none bg-transparent p-2 border-b ${errors.confirmPassword ? 'border-b-red' : 'border-b-white'}`}
+          className={`w-full focus:outline-none bg-transparent p-2 border-b caret-red ${errors.confirmPassword ? 'border-b-red' : 'border-b-white'}`}
           id="confirmPassword"
           type="password" {...register("confirmPassword")} />
         <span className='absolute right-0 p-2 text-red select-none'>

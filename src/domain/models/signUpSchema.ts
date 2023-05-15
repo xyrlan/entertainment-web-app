@@ -4,7 +4,8 @@ export const signUpSchema = z.object({
 
     email: z.string()
         .nonempty('Cant be empty')
-        .email('Invalid email format'),
+        .email('Invalid email format')
+        .toLowerCase(),
     password: z.string()
         .nonempty('Cant be empty')
         .min(6, 'Must contain min 6 characters'),
@@ -23,8 +24,11 @@ export const signUpSchema = z.object({
 export const loginSchema = z.object({
     email: z.string()
         .nonempty('Cant be empty')
-        .email('Invalid email format'),
+        .email('Invalid email format')
+        .toLowerCase(),
     password: z.string()
         .nonempty('Cant be empty')
         .min(6, 'Must contain min 6 characters'),
 })
+
+// .transform((value) => value.split("@")[0]),

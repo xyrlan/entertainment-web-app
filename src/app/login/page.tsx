@@ -9,20 +9,6 @@ import Link from "next/link"
 
 export default function LogIn() {
 
-    // const handleLogin = async (data: LoginFormData) => {
-    //     const result = await signIn('credentials', {
-    //       redirect: false,
-    //       email: data.email,
-    //       password: data.password,
-    //     });
-    
-    //     if (result.error) {
-    //       // Handle login error
-    //     } else {
-    //       // Redirect to dashboard
-
-
-
     return (
         <main className="flex flex-col min-h-screen items-center gap-10 p-24 text-white ">
 
