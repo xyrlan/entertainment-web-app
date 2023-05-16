@@ -23,9 +23,10 @@ export default function Home() {
 
 
         <div>
-          {movies.imageRegular.map((movie, index) => (
+          {movies.imageLarge.map((movie, index) => (
             <div key={index}>
               <img src={movie} alt={movies.imageName[index]} />
+              <h1>{movies.title[index]}</h1>
             </div>
           ))}
         </div>
