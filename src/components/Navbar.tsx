@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
     
 
     return (
-        <nav className="h-screen w-24 bg-semi-dark-blue flex flex-col items-center m-8 py-8 rounded-2xl ">
+        <nav className="h-[90%] w-24 bg-semi-dark-blue flex flex-col items-center m-8 py-8 rounded-2xl fixed z-20 ">
 
             <Image className="" src="/images/logo.svg" width={33} height={27} alt='logo' />
 
@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
 
 
 
-            <div className="absolute bottom-0 flex flex-col items-center gap-4">
+            <div className="absolute bottom-8 flex flex-col items-center gap-4">
                 <UserIcon />
                 <p className="text-xs text-greyish-blue">{localStorage.name}</p>
             </div>

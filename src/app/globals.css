@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   --foreground-rgb: 16, 20, 30;
   --background-start-rgb: 16, 20, 30;
@@ -25,6 +26,8 @@ body {
 * {
   text-decoration: none;
   box-sizing: border-box;
+  scroll-behavior: smooth;
+  
   
 }
 

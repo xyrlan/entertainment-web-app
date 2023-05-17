@@ -59,13 +59,13 @@ const UserIcon: React.FC = () => {
                 />
             </div>
 
-            {/* <img src="/images/user-icon.svg" alt="User Icon" onClick={handleIconClick} /> */}
+
             {isAuthenticated && (
                 <UserProfilePopup isOpen={isPopupOpen} onClose={handleClosePopup} setSelectedImage={setSelectedImage} selectedImage={selectedImage} />
             )}
-            {/* {isCloudOpen && ( */}
-            <div className={`absolute duration-500 ease-in-out transition-all bg-semi-dark-blue rounded-lg bottom-0 p-4 left-16 ${isCloudOpen ? 'w-32' : 'w-0 scale-0 left-0'}`}>
-                <ul className="space-y-2">
+
+            <div className={` absolute duration-500 ease-in-out transition-all bg-semi-dark-blue rounded-lg bottom-0 p-4 left-16 ${isCloudOpen ? 'w-40' : ' scale-0 -left-[100%] w-40'}`}>
+                <ul className=" space-y-2 flex flex-col">
                     {isAuthenticated && (
                         <li onClick={handleIconClick} className='flex gap-2 group hover:text-white text-greyish-blue font-semibold duration-300 cursor-pointer underline text-sm'>
 
