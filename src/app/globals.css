@@ -49,3 +49,25 @@ body {
   background-color: #161D2F;
   padding: 20px;
 }
+
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in.active {
+  opacity: 1;
+}
+
+.fade-slide {
+  transform:  translateX(0) translateY(0);
+
+
+  transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.fade-slide.active {
+  transform: translateX(-20px) translateY(20px)
+  /* transform: translateX(-20px); */
+}
