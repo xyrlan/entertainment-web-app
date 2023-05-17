@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
 
             <div className="absolute bottom-8 flex flex-col items-center gap-4">
                 <UserIcon />
-                <p className="text-xs text-greyish-blue">{localStorage.name}</p>
+                <p className="text-xs text-greyish-blue">{localStorage?.name}</p>
             </div>
 
 
