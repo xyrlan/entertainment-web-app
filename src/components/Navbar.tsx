@@ -3,8 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import UserIcon from "./userIcon"
 import React from "react"
-import { useState } from "react"
-
+import { useState, useEffect } from "react"
 
 
 
@@ -21,8 +20,6 @@ const Navbar: React.FC = () => {
     };
 
     const [isSelected, setSelected] = useState('home');
-
-  
 
 
     return (
