@@ -72,3 +72,16 @@ body {
   /* transform: translateX(-20px); */
 }
 
+.bullet {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+
+
+
+
+
