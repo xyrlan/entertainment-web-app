@@ -7,9 +7,14 @@ import Link from 'next/link';
 
 const UserIcon: React.FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const isAuthenticated = localStorage.getItem('email') !== null;
+
+    const isAuthenticated = typeof window !== 'undefined' && localStorage.getItem('email') !== null;
+
     const [isCloudOpen, setIsCloudOpen] = useState(false);
+
+    const UserImage = typeof window !== 'undefined' && localStorage.getItem('selectedImage');
 
     const handleCloudToggle = () => {
         setIsCloudOpen(!isCloudOpen);
@@ -20,7 +25,6 @@ const UserIcon: React.FC = () => {
         window.location.reload(); // Ou use a função de refreshPage que mencionei anteriormente
     };
 
-
     const handleIconClick = () => {
         setIsPopupOpen(true);
     };
@@ -29,8 +33,9 @@ const UserIcon: React.FC = () => {
         setIsPopupOpen(false);
     };
 
-    const UserImage = localStorage.getItem('selectedImage')
-
+    
+    
+    
 
     return (
         <>

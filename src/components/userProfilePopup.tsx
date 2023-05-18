@@ -71,7 +71,7 @@ const UserProfilePopup: React.FC<UserProfilePopupProps> = ({ isOpen, onClose, se
                         }}
                     >
                         <img
-                            src={localStorage.selectedImage || "/images/user-icon.svg"}
+                            src={selectedImage || "/images/user-icon.svg"}
                             alt="Cropped User Icon"
                             style={{
                                 width: '100%',
