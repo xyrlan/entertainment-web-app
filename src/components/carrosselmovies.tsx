@@ -32,10 +32,16 @@ const TrendingCarousel = ({ handleBookmark, selectedMovies }: { handleBookmark: 
                             </div>
 
                             <div className='h-full w-full justify-end items-start flex flex-col select-none cursor-pointer'>
-                                <ul className='flex gap-6 text-sm text-white opacity-90 mt-1'>
-                                    <li className=''>{movie.date}</li>
-                                    <li className='list-disc'> <div className='flex items-center gap-1'><img src={`${movie.category}`} /> <p>{movie.type}</p></div></li>
-                                    <li className='list-disc'>{movie.indication}</li>
+                                <ul className='flex items-center gap-2 sm:text-sm max-sm:text-xs text-greyish-blue mt-1 select-none max-h-5'>
+                                    <li>{movie.date}</li>
+                                    <li>
+                                        <div className='flex items-center gap-1'>
+                                            <span className='bullet bg-greyish-blue' /> {/* Estilo de marcador personalizado */}
+                                            <img src={`${movie.category}`} />
+                                            <p>{movie.type}</p>
+                                        </div>
+                                    </li>
+                                    <li className='flex items-center'><span className='bullet bg-greyish-blue' />{movie.indication}</li>
                                 </ul>
                                 <h1 className='text-xl font-semibold'>{movie.title}</h1>
                             </div>
