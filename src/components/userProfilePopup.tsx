@@ -57,7 +57,7 @@ const UserProfilePopup: React.FC<UserProfilePopupProps> = ({ isOpen, onClose, se
 
     return (
         <div className="popup-container" id="popup-container">
-            <div className="popup-content flex relative gap-8 rounded-2xl" ref={popupRef}>
+            <div className="popup-content flex max-sm:flex-col relative sm:gap-8 max-sm:gap-2 rounded-2xl" ref={popupRef}>
 
                 <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} id="file-input" ref={fileInputRef} />
                 <label className='flex flex-col items-center' htmlFor="file-input">
