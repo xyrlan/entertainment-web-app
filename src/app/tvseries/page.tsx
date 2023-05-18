@@ -68,10 +68,16 @@ export default function Series() {
 
                 </div>
 
-                <ul className='flex gap-6 sm:text-sm max-sm:text-xs text-greyish-blue mt-1 select-none max-h-5'>
-                  <li className=''>{movie.date}</li>
-                  <li className='list-disc '> <div className='flex items-center gap-1'><img src={`${movie.category}`} /> <p>{movie.type}</p></div></li>
-                  <li className='list-disc'>{movie.indication}</li>
+                <ul className='flex items-center gap-2 sm:text-sm max-sm:text-xs text-greyish-blue mt-1 select-none max-h-5'>
+                  <li>{movie.date}</li>
+                  <li>
+                    <div className='flex items-center gap-1'>
+                      <span className='bullet bg-greyish-blue' /> {/* Estilo de marcador personalizado */}
+                      <img src={`${movie.category}`} />
+                      <p>{movie.type}</p>
+                    </div>
+                  </li>
+                  <li className='flex items-center'><span className='bullet bg-greyish-blue' />{movie.indication}</li>
                 </ul>
                 <h1 className='font-semibold'>{movie.title}</h1>
 
