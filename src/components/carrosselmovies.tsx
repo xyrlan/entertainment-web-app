@@ -11,12 +11,12 @@ const TrendingCarousel = ({ handleBookmark, selectedMovies }: { handleBookmark: 
 
 
     return (
-        <div className='h-[250px] overflow-x-auto touch-auto scrollbar-track-transparent scroll-smooth scrollbar-thumb-semi-dark-blue scrollbar-thin scroll-pl-3 snap-x' dir='ltr' >
+        <div className='lg:h-[250px] max-lg:h-[230px] max-sm:h-[200px] overflow-x-auto touch-auto scrollbar-track-transparent scroll-smooth scrollbar-thumb-semi-dark-blue scrollbar-thin scroll-pl-3 snap-x' dir='ltr' >
 
-            <div className='flex justify-start flex-nowrap gap-10 w-[2510px] scrollbar' dir='ltr' >
+            <div className='flex justify-start flex-nowrap sm:gap-10 max-sm:gap-2 w-[2510px] scrollbar' dir='ltr' >
                 {msArrayTrendModified.map((movie, index) => (
 
-                    <div className='snap-start h-[230px] bg-cover w-full rounded-lg relative ' key={index} style={{ backgroundImage: `url(${movie.trendLargeImage})` }}>
+                    <div className='snap-start h-[230px] max-lg:h-[210px] max-sm:h-[180px] bg-cover w-full max-sm:max-w-xs rounded-lg relative ' key={index} style={{ backgroundImage: `url(${movie.trendLargeImage})` }}>
 
                         <div className='h-full w-full flex justify-center items-center hover:bg-black hover:bg-opacity-40 transition-all duration-500 group ease-out relative rounded-lg p-4'>
 

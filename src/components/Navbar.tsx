@@ -26,13 +26,13 @@ const Navbar: React.FC = () => {
 
 
     return (
-        <nav className="h-[90%] w-24 max-lg:w-[90%] max-lg:h-20 bg-semi-dark-blue flex lg:flex-col items-center m-8 lg:py-8 max-lg:px-4 rounded-2xl lg:fixed max-lg:absolute z-20 ">
+        <nav className="lg:h-[90%] lg:w-24 max-lg:w-[90%] max-lg:h-20 bg-semi-dark-blue flex lg:flex-col items-center sm:m-8 lg:py-8 max-lg:px-4 sm:rounded-2xl max-sm:rounded-b-2xl lg:fixed max-lg:absolute z-20 max-sm:w-full max-sm:justify-center ">
 
-            <Link href={'/'}>
+            <Link className="max-sm:absolute left-4" href={'/'}>
                 <Image className="" src="/images/logo.svg" width={33} height={27} alt='logo' />
             </Link>
 
-            <div className="lg:w-5 lg:h-52 max-lg:h-5 max-lg:w-52 max-sm:w-36 lg:mt-20 max-lg:ml-10 flex lg:flex-col justify-between">
+            <div className="lg:w-5 lg:h-52 max-lg:h-5 max-lg:w-52 max-sm:w-36 lg:mt-20 max-lg:ml-10 max-sm:ml-0 flex lg:flex-col justify-between">
                 {/* <Image src="/images/icon-nav-home.svg" width={33} height={27} alt='logo' /> */}
                 <Link href={'/'}>
                     <svg width="20" height="20" onClick={() => setSelected('home')} className={`fill-greyish-blue hover:fill-red duration-300 cursor-pointer ${isSelected === 'home' ? 'fill-white': '' }`} xmlns="http://www.w3.org/2000/svg"><path d="M8 0H1C.4 0 0 .4 0 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1V1c0-.6-.4-1-1-1Zm0 11H1c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1v-7c0-.6-.4-1-1-1ZM19 0h-7c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1V1c0-.6-.4-1-1-1Zm0 11h-7c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1v-7c0-.6-.4-1-1-1Z" /></svg>
@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
 
 
 
-            <div className="absolute lg:bottom-8 max-lg:right-8 flex lg:flex-col items-center gap-4 ">
+            <div className="absolute lg:bottom-8 max-lg:right-8 max-sm:right-4 flex lg:flex-col items-center gap-4 ">
                 <UserIcon />
                 <p className="max-sm:hidden text-xs text-greyish-blue">{localStorage?.name}</p>
             </div>

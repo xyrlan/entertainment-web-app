@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'; 
+import React from 'react';
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import TrendingCarousel from '@/components/carrosselmovies';
@@ -36,12 +36,12 @@ export default function Home() {
 
         <Navbar />
 
-        <main className='max-lg:px-8 lg:pl-40 pr-8 z-10'>
+        <main className='max-lg:px-8 lg:pl-40 max-sm:px-2 lg:pr-8 z-10'>
 
           <SearchBar onSearch={handleSearch} />
 
           {filteredMovies.length >= 0 && filteredMovies.length < 24 ? (
-            <div className='my-4 font-extralight text-3xl'>
+            <div className='my-4 font-extralight text-3xl max-md:text-xl'>
               Found {filteredMovies.length} {filteredMovies.length === 1 ? 'result' : 'results'} for "{searchQuery}"
             </div>
           ) : null}
@@ -54,12 +54,12 @@ export default function Home() {
 
           <h1 className={`text-2xl my-6 font-light duration-300 transition-all ${filteredMovies.length >= 0 && filteredMovies.length < 24 ? 'opacity-0 h-0 my-0' : 'opacity-100 h-full'}`}>Recommended for you</h1>
 
-          <div className='grid grid-cols-4 w-full max-xl:grid-cols-3 max-lg:grid-cols-2 gap-x-6'>
+          <div className='grid grid-cols-4 w-full max-xl:grid-cols-3 max-sm:grid-cols-2 gap-x-6'>
 
             {filteredMovies.map((movie, index) => (
-              <div className={`rounded-lg w-[300px] mb-8 duration-500 ${searchQuery ? '' : 'opacity-100'}`} key={movie.title}>
+              <div className={`rounded-lg w-full mb-8 duration-500 ${searchQuery ? '' : 'opacity-100'}`} key={movie.title}>
 
-                <div className='flex justify-center items-center rounded-lg bg-cover w-full h-[174px] cursor-pointer relative  duration-500 ease-out' style={{ backgroundImage: `url(${movie.imageLarge})` }} >
+                <div className={`flex justify-center items-center rounded-lg bg-cover w-full lg:h-[174px] max-lg:h-[150px] cursor-pointer relative  duration-500 ease-out`} style={{ backgroundImage: `url(${movie.imageLarge})` }}>
 
                   <div className='h-full w-full flex justify-center items-center bg-black bg-opacity-40 transition-all duration-500 opacity-0 hover:opacity-100 ease-out rounded-lg'>
 
@@ -78,6 +78,7 @@ export default function Home() {
 
                   </div>
 
+
                 </div>
                 <ul className='flex gap-6 text-sm text-greyish-blue mt-1 select-none'>
                   <li className=''>{movie.date}</li>
@@ -92,6 +93,7 @@ export default function Home() {
 
 
       </body>
+
     </>
   )
 }
