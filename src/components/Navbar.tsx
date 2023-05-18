@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
 
                 <div className="absolute lg:bottom-8 max-lg:right-8 max-sm:right-4 flex lg:flex-col items-center gap-4 ">
                     <UserIcon />
-                    <p className="max-sm:hidden text-xs text-greyish-blue">{UserName}</p>
+                    <p className="max-sm:hidden text-xs text-greyish-blue ">{UserName}</p>
                 </div>
 
 

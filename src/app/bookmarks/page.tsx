@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 
-import Navbar from '@/components/Navbar';   
+import Navbar from '@/components/Navbar';
 import { movies } from '@/infra/movies';
 import { series } from '@/infra/movies';
 import SearchBar from '@/components/Searchbar';
@@ -18,8 +18,8 @@ export default function Bookmarks() {
   };
 
 
-const mappedMovies = movies.filter(item => selectedMovies.includes(item.title))
-const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
+  const mappedMovies = movies.filter(item => selectedMovies.includes(item.title))
+  const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
 
   const filteredMovies = mappedMovies.filter((movie) =>
     movie.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -39,8 +39,21 @@ const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
 
           <SearchBar onSearch={handleSearch} />
 
-          <h1 className={`text-2xl my-6 font-light duration-300 transition-all`}>Bookmarked Movies</h1>
+          {filteredMovies.length === 0 && filteredSeries.length === 0 && mappedMovies.length !== 0 && mappedSeries.length !== 0 ? (
+            <div className='my-4 font-extralight text-3xl max-md:text-xl'>
+              Found 0 Bookmarked Movies or Series for &quot;{searchQuery}&quot;
+            </div>
+          ) : null}
 
+          {mappedMovies.length === 0 && mappedSeries.length === 0 ? (
+            <div className='my-4 font-extralight text-3xl max-md:text-xl'>
+              You has no Bookmared Movies or Series ...
+            </div>
+          ) : null}
+
+          {filteredMovies.length > 0 ? (
+            <h1 className={`text-2xl my-6 font-light duration-300 transition-all`}>Bookmarked Movies</h1>
+          ) : null}
           <div className='grid grid-cols-4 w-full max-xl:grid-cols-3 max-sm:grid-cols-2 gap-x-6'>
 
             {filteredMovies.map((movie, index) => (
@@ -66,7 +79,7 @@ const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
                   </div>
 
                 </div>
-                
+
                 <ul className='flex gap-6 text-sm text-greyish-blue mt-1 select-none'>
                   <li className=''>{movie.date}</li>
                   <li className='list-disc '> <div className='flex items-center gap-1'><img src={`${movie.category}`} /> <p>{movie.type}</p></div></li>
@@ -78,7 +91,9 @@ const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
               </div>
             ))}
           </div>
-          <h1 className={`text-2xl my-6 font-light duration-300 transition-all`}>Bookmarked TV Series</h1>
+          {filteredSeries.length > 0 ? (
+            <h1 className={`text-2xl my-6 font-light duration-300 transition-all`}>Bookmarked TV Series</h1>
+          ) : null}
 
           <div className='grid grid-cols-4 w-full max-xl:grid-cols-3 max-sm:grid-cols-2 gap-x-6'>
 
@@ -105,7 +120,7 @@ const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
                   </div>
 
                 </div>
-                
+
                 <ul className='flex gap-6 text-sm text-greyish-blue mt-1 select-none'>
                   <li className=''>{movie.date}</li>
                   <li className='list-disc '> <div className='flex items-center gap-1'><img src={`${movie.category}`} /> <p>{movie.type}</p></div></li>
