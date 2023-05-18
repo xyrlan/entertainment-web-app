@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { msArrayTrendModified } from '@/infra/movies';
 
 
-const TrendingCarousel = () => {
+
+
+
+const TrendingCarousel = ({ handleBookmark, selectedMovies }: { handleBookmark: (title: string) => void; selectedMovies: string[] }) => {
 
 
     return (
@@ -22,7 +25,9 @@ const TrendingCarousel = () => {
                                 <p className='font-semibold'>Play</p>
                             </div>
 
-                            <div className='self-start rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 cursor-pointer absolute right-4 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in'>
+                            <div className={`rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in ${selectedMovies.includes(movie.title) ? 'fill-white hover:stroke-white hover:bg-black' : ''
+                                }`}
+                                onClick={() => handleBookmark(movie.title)}>
                                 <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" stroke-width="1.5" /></svg>
                             </div>
 

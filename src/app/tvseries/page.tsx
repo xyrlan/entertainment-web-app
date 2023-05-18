@@ -1,35 +1,24 @@
-'use client'
-import React from 'react'; 
+"use client"
 import { useState, useEffect } from 'react';
-import Navbar from '@/components/Navbar';
-import TrendingCarousel from '@/components/carrosselmovies';
-import { msArrayOutTrend } from '@/infra/movies';
-import { msArraysModified } from '@/infra/movies';
+
+import Navbar from '@/components/Navbar';   
+import { series } from '@/infra/movies';
 import SearchBar from '@/components/Searchbar';
 import useBookmark from '@/hook/bookmarkHook';
-import { useRouter } from 'next/router';
 
 
-export default function Home() {
+export default function Series() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const { selectedMovies, handleBookmark } = useBookmark();
-
 
   const handleSearch = (query: any) => {
     setSearchQuery(query);
   };
 
-  let filteredMovies = msArrayOutTrend.filter((movie) =>
+  const filteredMovies = series.filter((movie) =>
     movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  if (filteredMovies.length < 20) {
-    filteredMovies = msArraysModified.filter((movie) =>
-      movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }
-
+  )
   return (
     <>
       <body className='text-white h-screen font-outfit'>
@@ -40,19 +29,13 @@ export default function Home() {
 
           <SearchBar onSearch={handleSearch} />
 
-          {filteredMovies.length >= 0 && filteredMovies.length < 24 ? (
+          {filteredMovies.length >= 0 && filteredMovies.length < 11 ? (
             <div className='my-4 font-extralight text-3xl'>
               Found {filteredMovies.length} {filteredMovies.length === 1 ? 'result' : 'results'} for "{searchQuery}"
             </div>
           ) : null}
 
-          <div className={`duration-300 transition-all ${filteredMovies.length >= 0 && filteredMovies.length < 24 ? 'opacity-0 h-0' : 'opacity-100 h-full'}`}>
-            <h1 className='text-2xl my-6 font-light'>Trending</h1>
-            <TrendingCarousel handleBookmark={handleBookmark} selectedMovies={selectedMovies} />
-          </div>
-
-
-          <h1 className={`text-2xl my-6 font-light duration-300 transition-all ${filteredMovies.length >= 0 && filteredMovies.length < 24 ? 'opacity-0 h-0 my-0' : 'opacity-100 h-full'}`}>Recommended for you</h1>
+          <h1 className={`text-2xl my-6 font-light duration-300 transition-all ${filteredMovies.length >= 0 && filteredMovies.length < 11 ? 'opacity-0 h-0 my-0' : 'opacity-100 h-full'}`}>TV Series</h1>
 
           <div className='grid grid-cols-4 w-full max-xl:grid-cols-3 max-lg:grid-cols-2 gap-x-6'>
 
@@ -74,17 +57,20 @@ export default function Home() {
                     }`}
                     onClick={() => handleBookmark(movie.title)}>
 
-                    <svg className='' width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" stroke-width="1.5" /></svg>
+                    <svg className='' width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="m10.518.75.399 12.214-5.084-4.11-4.535 4.426L.75 1.036l9.768-.285Z" stroke-width="1.5" /></svg>
 
                   </div>
 
                 </div>
+                
                 <ul className='flex gap-6 text-sm text-greyish-blue mt-1 select-none'>
                   <li className=''>{movie.date}</li>
                   <li className='list-disc '> <div className='flex items-center gap-1'><img src={`${movie.category}`} /> <p>{movie.type}</p></div></li>
                   <li className='list-disc'>{movie.indication}</li>
                 </ul>
                 <h1 className='font-semibold'>{movie.title}</h1>
+
+
               </div>
             ))}
           </div>
