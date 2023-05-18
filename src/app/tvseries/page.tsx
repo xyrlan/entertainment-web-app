@@ -31,7 +31,7 @@ export default function Series() {
 
           {filteredMovies.length >= 0 && filteredMovies.length < 11 ? (
             <div className='my-4 font-extralight text-3xl'>
-              Found {filteredMovies.length} {filteredMovies.length === 1 ? 'result' : 'results'} for "{searchQuery}"
+              Found {filteredMovies.length} {filteredMovies.length === 1 ? 'result' : 'results'} for &quot;{searchQuery}&quot;
             </div>
           ) : null}
 

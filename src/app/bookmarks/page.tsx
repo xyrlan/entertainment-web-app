@@ -39,12 +39,6 @@ const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
         <main className='max-lg:px-8 lg:pl-40 max-sm:px-2 lg:pr-8 z-10'>
 
           <SearchBar onSearch={handleSearch} />
-{/* 
-          {filteredMovies.length >= 0 && filteredMovies.length < 11 ? (
-            <div className='my-4 font-extralight text-3xl'>
-              Found {filteredMovies.length} {filteredMovies.length === 1 ? 'result' : 'results'} for "{searchQuery}"
-            </div>
-          ) : null} */}
 
           <h1 className={`text-2xl my-6 font-light duration-300 transition-all`}>Bookmarked Movies</h1>
 
@@ -125,8 +119,6 @@ const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
             ))}
           </div>
         </main>
-
-
       </body>
     </>
   )
