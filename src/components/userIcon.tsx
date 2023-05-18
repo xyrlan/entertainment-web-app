@@ -1,6 +1,5 @@
 import UserProfilePopup from './userProfilePopup';
 import { useEffect, useRef, useState } from 'react';
-import ReactCrop, { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import Link from 'next/link';
 

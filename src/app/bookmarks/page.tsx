@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 
 import Navbar from '@/components/Navbar';   
-import { msArraysModified } from '@/infra/movies';
 import { movies } from '@/infra/movies';
 import { series } from '@/infra/movies';
 import SearchBar from '@/components/Searchbar';

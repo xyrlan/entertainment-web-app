@@ -7,7 +7,6 @@ import { msArrayOutTrend } from '@/infra/movies';
 import { msArraysModified } from '@/infra/movies';
 import SearchBar from '@/components/Searchbar';
 import useBookmark from '@/hook/bookmarkHook';
-import { useRouter } from 'next/router';
 
 
 export default function Home() {
