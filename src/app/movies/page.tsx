@@ -67,9 +67,9 @@ export default function Movies() {
 
                 </div>
 
-                <ul className='flex gap-6 text-sm text-greyish-blue mt-1 select-none'>
+                <ul className='flex gap-6 sm:text-sm max-sm:text-xs text-greyish-blue mt-1 select-none max-h-5'>
                   <li className=''>{movie.date}</li>
-                  <li className='list-disc '> <div className='flex gap-1'><img src={`${movie.category}`} /> <p>{movie.type}</p></div></li>
+                  <li className='list-disc'> <div className='flex gap-1 items-center'><img src={`${movie.category}`} /> <p>{movie.type}</p></div></li>
                   <li className='list-disc'>{movie.indication}</li>
                 </ul>
                 <h1 className='font-semibold'>{movie.title}</h1>
