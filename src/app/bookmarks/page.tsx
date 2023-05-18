@@ -36,7 +36,7 @@ const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
 
         <Navbar />
 
-        <main className='pl-40 pr-8 z-10'>
+        <main className='max-lg:px-8 lg:pl-40 pr-8 z-10'>
 
           <SearchBar onSearch={handleSearch} />
 {/* 
@@ -57,14 +57,14 @@ const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
 
                   <div className='h-full w-full flex justify-center items-center bg-black bg-opacity-40 transition-all duration-500 opacity-0 hover:opacity-100 ease-out rounded-lg'>
 
-                    <div className='flex items-center absolute gap-5 h-12 w-28 p-2 rounded-full bg-gray-400 hover:bg-white bg-opacity-30 fill-white hover:fill-red hover:text-red duration-300 ease-in'>
+                    <div className='select-none flex items-center absolute gap-5 h-12 w-28 p-2 rounded-full bg-gray-400 hover:bg-white bg-opacity-30 fill-white hover:fill-red hover:text-red duration-300 ease-in'>
                       <svg className='' width="30" height="30" xmlns="http://www.w3.org/2000/svg"><path d="M15 0C6.713 0 0 6.713 0 15c0 8.288 6.713 15 15 15 8.288 0 15-6.712 15-15 0-8.287-6.712-15-15-15Zm-3 21V8l9 6.5-9 6.5Z" /></svg>
                       <p className='font-semibold'>Play</p>
                     </div>
 
                   </div>
 
-                  <div id='bookmark' className={`rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in ${selectedMovies.includes(movie.title) ? 'fill-white hover:stroke-white hover:bg-black' : ''
+                  <div id='bookmark' className={`rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in ${selectedMovies.includes(movie.title) ? 'fill-white hover:fill-transparent hover:stroke-white hover:bg-black' : ''
                     }`}
                     onClick={() => handleBookmark(movie.title)}>
 
@@ -96,14 +96,14 @@ const mappedSeries = series.filter(item => selectedMovies.includes(item.title))
 
                   <div className='h-full w-full flex justify-center items-center bg-black bg-opacity-40 transition-all duration-500 opacity-0 hover:opacity-100 ease-out rounded-lg'>
 
-                    <div className='flex items-center absolute gap-5 h-12 w-28 p-2 rounded-full bg-gray-400 hover:bg-white bg-opacity-30 fill-white hover:fill-red hover:text-red duration-300 ease-in'>
+                    <div className='select-none flex items-center absolute gap-5 h-12 w-28 p-2 rounded-full bg-gray-400 hover:bg-white bg-opacity-30 fill-white hover:fill-red hover:text-red duration-300 ease-in'>
                       <svg className='' width="30" height="30" xmlns="http://www.w3.org/2000/svg"><path d="M15 0C6.713 0 0 6.713 0 15c0 8.288 6.713 15 15 15 8.288 0 15-6.712 15-15 0-8.287-6.712-15-15-15Zm-3 21V8l9 6.5-9 6.5Z" /></svg>
                       <p className='font-semibold'>Play</p>
                     </div>
 
                   </div>
 
-                  <div id='bookmark' className={`rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in ${selectedMovies.includes(movie.title) ? 'fill-white hover:stroke-white hover:bg-black' : ''
+                  <div id='bookmark' className={`rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in ${selectedMovies.includes(movie.title) ? 'fill-white hover:fill-transparent hover:stroke-white hover:bg-black' : ''
                     }`}
                     onClick={() => handleBookmark(movie.title)}>
 
