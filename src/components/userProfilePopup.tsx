@@ -8,10 +8,12 @@ type UserProfilePopupProps = {
     onClose: () => void;
     selectedImage: string | null;
     setSelectedImage: any;
+    UserImage: string | false | null;
 };
 
-const UserProfilePopup: React.FC<UserProfilePopupProps> = ({ isOpen, onClose, selectedImage, setSelectedImage }) => {
+const UserProfilePopup: React.FC<UserProfilePopupProps> = ({ isOpen, onClose, selectedImage, setSelectedImage, UserImage }) => {
     // const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    
     const popupRef = useRef<HTMLDivElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -71,7 +73,7 @@ const UserProfilePopup: React.FC<UserProfilePopupProps> = ({ isOpen, onClose, se
                         }}
                     >
                         <img
-                            src={selectedImage || "/images/user-icon.svg"}
+                            src={UserImage || "/images/user-icon.svg"}
                             alt="Cropped User Icon"
                             style={{
                                 width: '100%',
