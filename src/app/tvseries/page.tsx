@@ -1,7 +1,8 @@
 "use client"
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 
-import Navbar from '@/components/Navbar';   
+import Navbar from '@/components/Navbar';
 import { series } from '@/infra/movies';
 import SearchBar from '@/components/Searchbar';
 import useBookmark from '@/hook/bookmarkHook';
@@ -21,6 +22,10 @@ export default function Series() {
   )
   return (
     <>
+      <head>
+        <title>M&S - TVseries</title>
+        <link rel='icon' type='svg' href='/images/logo.svg' />
+      </head>
       <body className='text-white h-screen font-outfit'>
 
         <Navbar />
@@ -62,7 +67,7 @@ export default function Series() {
                   </div>
 
                 </div>
-                
+
                 <ul className='flex gap-6 text-sm text-greyish-blue mt-1 select-none'>
                   <li className=''>{movie.date}</li>
                   <li className='list-disc '> <div className='flex items-center gap-1'><img src={`${movie.category}`} /> <p>{movie.type}</p></div></li>

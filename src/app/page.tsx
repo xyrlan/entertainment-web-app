@@ -9,6 +9,7 @@ import SearchBar from '@/components/Searchbar';
 import useBookmark from '@/hook/bookmarkHook';
 
 
+
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -31,7 +32,11 @@ export default function Home() {
 
   return (
     <>
-      <body className='text-white h-screen font-outfit'>
+      <head>
+        <title>M&S - Home </title>
+        <link rel='icon' type='svg' href='/images/logo.svg' />
+      </head>
+      <div className='text-white h-screen font-outfit'>
 
         <Navbar />
 
@@ -91,7 +96,7 @@ export default function Home() {
         </main>
 
 
-      </body>
+      </div>
 
     </>
   )

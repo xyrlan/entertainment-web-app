@@ -21,6 +21,10 @@ export default function Movies() {
   )
   return (
     <>
+      <head>
+        <title>M&S - Movies</title>
+        <link rel='icon' type='svg' href='/images/logo.svg' />
+      </head>
       <body className='text-white h-screen font-outfit'>
 
         <Navbar />

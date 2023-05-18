@@ -31,6 +31,10 @@ export default function Bookmarks() {
 
   return (
     <>
+      <head>
+        <title>M&S - Bookmarks</title>
+        <link rel='icon' type='svg' href='/images/logo.svg' />
+      </head>
       <body className='text-white h-screen font-outfit'>
 
         <Navbar />
