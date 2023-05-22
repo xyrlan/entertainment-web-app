@@ -81,7 +81,7 @@ export default function Home() {
 
           <div className='flex justify-start flex-nowrap sm:gap-10 w-full max-sm:gap-2 scrollbar' dir='ltr' >
             {topitems.map((topitem, index) => (
-              <TrendingCarousel topitem={topitem} />
+              <TrendingCarousel key={topitem.title} topitem={topitem} />
             ))}
 
           </div>
