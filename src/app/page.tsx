@@ -8,7 +8,6 @@ import { msArraysModified } from '@/infra/movies';
 import SearchBar from '@/components/Searchbar';
 import useBookmark from '@/hook/bookmarkHook';
 
-import { fetchData } from '@/infra/tmdbnew';
 import useFetchData from '@/hook/useFetchData';
 import { fetchPopularMovies, fetchPopularShows, fetchTopRatedMovies, fetchTopRatedShows } from '@/infra/tmdb';
 
