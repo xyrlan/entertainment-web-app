@@ -74,12 +74,12 @@ export default function SearchBar({ currentPage }: any) {
         placeholderText = 'Search for bookmarked shows';
     }
 
-    const svgElement = document.querySelector('.svg-clickable');
-    const inputElement = document.querySelector('input');
+    // const svgElement = document.querySelector('.svg-clickable');
+    // const inputElement = document.querySelector('input');
 
-    svgElement?.addEventListener('click', function () {
-        inputElement?.focus();
-    });
+    // svgElement?.addEventListener('click', function () {
+    //     inputElement?.focus();
+    // });
 
     return (
         <>
