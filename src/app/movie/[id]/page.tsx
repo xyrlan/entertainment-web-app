@@ -37,7 +37,7 @@ export default function Page({ params }: { params: any }) {
         <title>{item !== null && item !== undefined ? 'M&S - ' + item.title : 'M&S - Home'}</title>
       </head>
       {
-        item !== null && item !== undefined ? <ItemDetail item={item}/> : <div>Loading</div>
+        item !== null && item !== undefined ? <ItemDetail key={item.title} item={item}/> : <div>Loading</div>
       }
     </div>
   );
