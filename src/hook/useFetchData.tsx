@@ -9,6 +9,7 @@ interface Movie {
     rating: 'Adult' | 'E';
     genreIds: number[];
     vote_average: number;
+    trailer: string;
   }
 
 

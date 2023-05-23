@@ -8,6 +8,7 @@ const fetchData = async (url: string) => {
     throw new Error(`Failed to fetch data: ${response.status}`);
   }
   return await response.json();
+  
 };
 
 interface ProcessedItem {
@@ -40,13 +41,15 @@ const processData = (results: any[], requireBackdrop = false): ProcessedItem[] =
     rating: item.adult ? 'Adult' : 'E',
     genreIds: item.genre_ids,
     vote_average: item.vote_average,
+    trailer: `https://api.themoviedb.org/3/movie/${item.id}/videos?api_key=94336ccdc9e2add3bab1e3dc33dc881a`
+    
   }));
 };
 
 const buildUrl = (path: string, queryParams: URLSearchParams) => {
   const url = new URL(`${BASE_URL}${path}`);
   queryParams.set('api_key', TMDB_API_KEY);
-  queryParams.set('language', 'en-US');
+  // queryParams.set('language', 'en-US');
   url.search = queryParams.toString();
   return url.href;
 };
@@ -73,6 +76,13 @@ export const fetchTrendingAllWeek = async () => {
   return processData(data.results);
 };
 
+// export const fetchMoviesTrailer = async () => {
+//     const url = buildUrl(`movie/${id}/videos`, new URLSearchParams());
+//     const data = await fetchData(url);
+//     return processData(data.results);
+// }
+
+
 const fetchMoviesByPath = async (
   path: string,
   mediaType = 'movie',
@@ -87,6 +97,7 @@ const fetchMoviesByPath = async (
     category: mediaType === 'movie' ? 'Movie' : 'TV Series',
   }));
 };
+
 
 export const fetchPopularMovies = async () => {
   return fetchMoviesByPath('/movie/popular', 'movie', true);
@@ -103,6 +114,7 @@ export const fetchTopRatedMovies = async () => {
 export const fetchGenreMovies = async (genreId: number) => {
   return fetchGenreItems('/discover/movie', genreId);
 };
+
 
 const fetchTVSeriesByPath = async (
   path: string,
@@ -177,7 +189,7 @@ export const fetchGenreShows = async (genreId: number) => {
   return shows;
 };
 
-const fetchItemCredits = async (id: number, itemType: string) => {
+const fetchItemCredits = async (id: string, itemType: string) => {
   const creditsUrl = buildUrl(
     `/${itemType}/${id}/credits`,
     new URLSearchParams()
@@ -186,7 +198,21 @@ const fetchItemCredits = async (id: number, itemType: string) => {
   return creditsData.cast.map((actor: any) => actor.name);
 };
 
-export const fetchItemDetails = async (id: number, category: string) => {
+// export interface Item {
+//   title: string;
+//   poster: string;
+//   length: number | null;
+//   language: string;
+//   year: string;
+//   synopsis: string;
+//   rating: number;
+//   genres: string[];
+//   tagline: string;
+//   status: string;
+  
+// }
+
+export const fetchItemDetails = async (id: string, category: any) => {
   const itemType = category === 'Movie' ? 'movie' : 'tv';
 
   const detailsUrl = buildUrl(`/${itemType}/${id}`, new URLSearchParams());
@@ -211,3 +237,6 @@ export const fetchItemDetails = async (id: number, category: string) => {
 
   return item;
 };
+
+// export async function fetchDetails() {fetchData('https://api.themoviedb.org/3/movie/882569?api_key=94336ccdc9e2add3bab1e3dc33dc881a')}
+// fetchDetails()

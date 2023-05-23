@@ -12,7 +12,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-
+      <head>
+        <title>M&S - Home</title>
+        <link rel='icon' type='svg' href='/images/logo.svg' />
+      </head>
       <body>
         {children}</body>
     </html>
