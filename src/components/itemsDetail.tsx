@@ -101,7 +101,7 @@ const ItemDetail = ({ item }: any) => {
                             {item.tagline}
                         </h2>
                         <div className='flex flex-col md:flex-row gap-4 items-center mb-4 md:mb-0'>
-                            <p className='text-4xl'>{parseFloat(ratingOutOf5).toFixed(1)}</p>
+                            <p className='text-4xl'>{parseFloat(`${ratingOutOf5}`).toFixed(1)}</p>
                             <div className='flex text-xl text-red'>
                                 {generateStars(ratingOutOf5)}{' '}
                             </div>
@@ -137,7 +137,7 @@ const ItemDetail = ({ item }: any) => {
                                     ))}
                                 </div>
                             </div>
-                            <div>
+                            <div className=''>
                                 <h6 className='font-lg mb-1'>Synopsis</h6>
                                 <p className='font-light'>{item.synopsis}</p>
                             </div>
@@ -149,12 +149,17 @@ const ItemDetail = ({ item }: any) => {
                                         if (showAllCast && index > 15) return null;
 
                                         return (
-                                            <div className='flex flex-col justify-center items-center'>
-                                            <img className='w-20 h-20' src={`https://image.tmdb.org/t/p/original${actor.profile_path}`} alt="aaddasd" />
+                                            <div className='flex flex-col justify-center items-center max-w-full'>
+                                            <img className='w-20 h-24' src={`https://image.tmdb.org/t/p/original${actor.profile_path}`} alt={actor.name} />
                                             <span
                                                 key={index}
                                                 className='bg-semiDarkBlue text-grayishBlue tracking-wider rounded-lg px-2 py-1 text-sm'>
                                                 {actor.name}
+                                            </span>
+                                            <span
+                                                key={index}
+                                                className='bg-semiDarkBlue text-grayishBlue tracking-wider rounded-lg px-2 py-1 text-sm'>
+                                                {actor.character}
                                             </span>
                                             </div>
                                         );
