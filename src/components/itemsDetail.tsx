@@ -90,7 +90,7 @@ const ItemDetail = ({ item }: any) => {
                 <FontAwesomeIcon className='pr-2' icon={faArrowLeft} size='xl' />
             </button>
             {selectedVideo ? (
-                <div className={`video-overlay duration-1000 ${selectedVideo ? 'opacity-100' : 'opacity-0'}`} ref={videoRef}>
+                <div key={selectedVideo} className={`video-overlay duration-1000 ${selectedVideo ? 'opacity-100' : 'opacity-0'}`} ref={videoRef}>
                     <iframe
                         allowFullScreen
                         className='select-none mb-4 video-iframe w-full h-full max-h-[80%] max-w-[80%]'
@@ -174,8 +174,8 @@ const ItemDetail = ({ item }: any) => {
                         <div>
                             <h6 className='text-xl mb-2 text-greyish-blue'>Production Companies</h6>
                             <div className='flex justify-start gap-2 flex-wrap pt-2'>
-                                {item.prodcompanies.map((companies: any) => (
-                                    <div className='flex items-center gap-2'>
+                                {item.prodcompanies.map((companies: any, index: number) => (
+                                    <div key={index} className='flex items-center gap-2'>
                                         <img className='h-10 mb-2' src={`https://image.tmdb.org/t/p/original${companies.logo_path}`} alt='' />
                                         {/* <div>{companies.name}</div> */}
                                     </div>
