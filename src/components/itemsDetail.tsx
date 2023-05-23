@@ -16,6 +16,8 @@ import {
 
 
 
+
+
 const ItemDetail = ({ item }: any) => {
     const router = useRouter();
     const [showAllCast, setShowAllCast] = useState(false);
@@ -36,7 +38,7 @@ const ItemDetail = ({ item }: any) => {
         setShowAllCast(!showAllCast);
     };
 
-    const ratingOutOf5 = parseFloat(item.rating) / 2;
+    const ratingOutOf5:number = parseFloat(item.rating) / 2;
 
     // Generate star elements
     const generateStars = (rating: number) => {
@@ -74,24 +76,17 @@ const ItemDetail = ({ item }: any) => {
                     </button>
                     {isVideoPlaying ? (
                         <div className=' video-overlay'>
-                            <iframe className='mb-4 w-full max-md:w-[80%] video-iframe' width="560" height="315" src={`https://www.youtube.com/embed/${item.trailers}`} style={{
-                                border: 'none',
-                                borderRadius: '8px',
-                                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                            }} frameborder="0" allowfullscreen></iframe>
+                            <iframe className='mb-4 w-full max-md:w-[80%] video-iframe' width="560" height="315" src={`https://www.youtube.com/embed/${item.trailers}`} 
+                         ></iframe>
                         </div>
                     ) : (
                         <div className="flex justify-center" onClick={handleVideoClick}>
                             <iframe onClick={handleVideoClick} 
-                            className='mb-4 w-full max-md:w-[80%] max-md:h-[200px] video-iframe ' width="560" height="315" src={`https://www.youtube.com/embed/${item.trailers}`} style={{
-                                border: 'none',
-                                borderRadius: '8px',
-                                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                            }} frameborder="0" allowfullscreen seamless="seamless"></iframe>
+                            className='mb-4 w-full max-md:w-[80%] max-md:h-[200px] video-iframe shadow-lg shadow-black' width="560" height="315" src={`https://www.youtube.com/embed/${item.trailers}`}></iframe>
                         </div>
                     )}
                     <img
-                        className='mx-auto rounded-lg md:mx-0 max-w-[240px] md:max-w-full'
+                        className='shadow-xl shadow-black mx-auto rounded-lg md:mx-0 max-w-[240px] md:max-w-full'
                         src={item.poster}
                         alt={item.title}
                     />
@@ -133,7 +128,7 @@ const ItemDetail = ({ item }: any) => {
                         <div className='flex flex-col gap-1'>
                             <p className='font-lg mb-1'>Genres</p>
                             <div className='flex gap-2 flex-wrap text-sm md:text-base'>
-                                {item.genres.map((genre, index) => (
+                                {item.genres.map((genre: any, index: number) => (
                                     <span
                                         key={index}
                                         className='bg-white py-1 px-2 rounded-xl text-sm tracking-wider text-black'>
