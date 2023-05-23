@@ -98,7 +98,7 @@ export default function Home() {
 
         <div className='flex justify-start flex-nowrap sm:gap-10 w-full max-sm:gap-2 scrollbar' dir='ltr' >
           {topitems.map((topitem, index) => (
-            <TrendingCarousel key={topitem.title} 
+            <TrendingCarousel key={topitem.id} 
             topitem={topitem} 
             handleBookmark={handleBookmark} 
             isBookmarked={bookmarks.some((bookmark: any | null) => bookmark.id === topitem.id)}
@@ -115,6 +115,7 @@ export default function Home() {
 
         {items.map((item, index) => (
           <Cards
+            key={item.id}
             item={item}
             handleBookmark={handleBookmark}
             isBookmarked={bookmarks.some((bookmark: any | null) => bookmark.id === item.id)}
