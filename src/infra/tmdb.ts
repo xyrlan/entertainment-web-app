@@ -194,7 +194,7 @@ const fetchItemCredits = async (id: string, itemType: string) => {
     new URLSearchParams()
   );
   const creditsData = await fetchData(creditsUrl);
-  return creditsData.cast.map((actor: any) => actor.name);
+  return creditsData.cast.map((actor: any) => actor);
 };
 
 // export interface Item {
@@ -221,7 +221,7 @@ export const fetchItemDetails = async (id: string, category: any) => {
   const trailersData = await fetchData(trailersUrl);
   console.log(trailersUrl);
   console.log(trailersData);
-
+  console.log(cast)
 
   const item = {
     title: detailsData.title || detailsData.name,
@@ -236,6 +236,7 @@ export const fetchItemDetails = async (id: string, category: any) => {
     genres: detailsData.genres.map((genre: any) => genre.name),
     tagline: detailsData.tagline,
     status: detailsData.status,
+    profileimage: `${TMDB_IMAGE_ENDPOINT}${cast.profile_path}`,
     cast: cast,
     trailers: trailersData.key,
 
