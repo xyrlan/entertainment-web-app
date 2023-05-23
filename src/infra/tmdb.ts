@@ -41,7 +41,6 @@ const processData = (results: any[], requireBackdrop = false): ProcessedItem[] =
     rating: item.adult ? 'Adult' : 'E',
     genreIds: item.genre_ids,
     vote_average: item.vote_average,
-    trailer: `https://api.themoviedb.org/3/movie/${item.id}/videos?api_key=94336ccdc9e2add3bab1e3dc33dc881a`
     
   }));
 };
