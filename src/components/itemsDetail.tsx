@@ -149,7 +149,7 @@ const ItemDetail = ({ item }: any) => {
                                         if (showAllCast && index > 15) return null;
 
                                         return (
-                                            <div className='flex flex-col justify-center items-center max-w-full'>
+                                            <div key={actor.id} className='flex flex-col justify-center items-center max-w-full'>
                                             <img className='w-20 h-24' src={`https://image.tmdb.org/t/p/original${actor.profile_path}`} alt={actor.name} />
                                             <span
                                                 key={index}
