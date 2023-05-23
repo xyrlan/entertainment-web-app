@@ -218,6 +218,11 @@ export const fetchItemDetails = async (id: string, category: any) => {
   const detailsUrl = buildUrl(`/${itemType}/${id}`, new URLSearchParams());
   const detailsData = await fetchData(detailsUrl);
   const cast = await fetchItemCredits(id, itemType);
+  const trailersUrl = buildUrl(`/${itemType}/${id}/videos`, new URLSearchParams());
+  const trailersData = await fetchData(trailersUrl);
+  console.log(trailersUrl);
+  console.log(trailersData);
+
 
   const item = {
     title: detailsData.title || detailsData.name,
@@ -233,6 +238,9 @@ export const fetchItemDetails = async (id: string, category: any) => {
     tagline: detailsData.tagline,
     status: detailsData.status,
     cast: cast,
+    trailers: trailersData.key,
+
+
   };
 
   return item;

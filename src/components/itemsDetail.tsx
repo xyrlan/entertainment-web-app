@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -18,6 +19,14 @@ import {
 const ItemDetail = ({ item }: any) => {
     const router = useRouter();
     const [showAllCast, setShowAllCast] = useState(false);
+
+    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+    console.log(isVideoPlaying);
+
+    const handleVideoClick = () => {
+        setIsVideoPlaying(true);
+    };
 
     const handleGoBack = () => {
         router.back();
@@ -53,8 +62,9 @@ const ItemDetail = ({ item }: any) => {
         );
     };
 
+
     return (
-        <section className='mt-4 xl:ml-8 xl:mt-16'>
+        <div className='mt-4 xl:ml-8 xl:mt-16 p-2'>
             <div className=' text-white flex flex-col justify-center gap-6 pb-10 md:grid md:grid-cols-[1fr,_2fr] md:gap-8 md:max-w-screen-xl md:mx-auto'>
                 <div>
                     <button
@@ -62,13 +72,33 @@ const ItemDetail = ({ item }: any) => {
                         onClick={handleGoBack}>
                         <FontAwesomeIcon className='pr-2' icon={faArrowLeft} size='xl' />
                     </button>
+                    {isVideoPlaying ? (
+                        <div className=' video-overlay'>
+                            <iframe className='mb-4 w-full max-md:w-[80%] video-iframe' width="560" height="315" src={`https://www.youtube.com/embed/${item.trailers}`} style={{
+                                border: 'none',
+                                borderRadius: '8px',
+                                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                            }} frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    ) : (
+                        <div className="flex justify-center" onClick={handleVideoClick}>
+                            <iframe onClick={handleVideoClick} 
+                            className='mb-4 w-full max-md:w-[80%] max-md:h-[200px] video-iframe ' width="560" height="315" src={`https://www.youtube.com/embed/${item.trailers}`} style={{
+                                border: 'none',
+                                borderRadius: '8px',
+                                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                            }} frameborder="0" allowfullscreen seamless="seamless"></iframe>
+                        </div>
+                    )}
                     <img
                         className='mx-auto rounded-lg md:mx-0 max-w-[240px] md:max-w-full'
                         src={item.poster}
                         alt={item.title}
                     />
                 </div>
+
                 <div className='flex flex-col gap-4 md:pt-12'>
+
                     <h1 className='text-3xl text-center md:text-left md:text-4xl xl:text-5xl'>
                         {item.title}
                     </h1>
@@ -125,7 +155,7 @@ const ItemDetail = ({ item }: any) => {
                                     return (
                                         <span
                                             key={index}
-                                            className='bg-semiDarkBlue text-grayishBlue tracking-wider  rounded-lg px-2 py-1 text-sm'>
+                                            className='bg-semiDarkBlue text-grayishBlue tracking-wider rounded-lg px-2 py-1 text-sm'>
                                             {actor}
                                         </span>
                                     );
@@ -140,7 +170,7 @@ const ItemDetail = ({ item }: any) => {
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 

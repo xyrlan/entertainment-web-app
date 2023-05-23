@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 export default function Cards({ item, handleBookmark, isBookmarked }: any) {
     const router = useRouter();
 
-    
+
 
     const handlePlayClick = (category: string, id: number) => {
         if (category === 'Movie') {
@@ -18,7 +18,7 @@ export default function Cards({ item, handleBookmark, isBookmarked }: any) {
 
             <div className={`flex justify-center items-center rounded-lg bg-cover w-full lg:h-[174px] max-lg:h-[150px] cursor-pointer relative  duration-500 ease-out`} style={{ backgroundImage: `url(${item.image})` }}>
 
-                <div className='h-full w-full flex justify-center items-center bg-black bg-opacity-40 transition-all duration-500 opacity-0 hover:opacity-100 ease-out rounded-lg'>
+                <div className='h-full w-full flex justify-center items-center bg-black bg-opacity-40 transition-all duration-500 opacity-0 hover:opacity-100 ease-out rounded-lg '>
 
                     <div
                         onClick={() => handlePlayClick(item.category, item.id)}
@@ -29,7 +29,7 @@ export default function Cards({ item, handleBookmark, isBookmarked }: any) {
 
                 </div>
 
-                <div id='bookmark' className={`rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in ${isBookmarked ? 'fill-white hover:stroke-white hover:bg-black' : ''
+                <div id='bookmark' className={`rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in  ${isBookmarked ? 'fill-white hover:stroke-white hover:bg-black' : ''
                     }`}
                     onClick={() => { handleBookmark(item) }}>
 
