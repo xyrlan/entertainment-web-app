@@ -1,11 +1,18 @@
+"use client"
 import { createContext, useState, useRef, useContext } from 'react';
 
-export const SearchContext = createContext();
+export const SearchContext = createContext<any | null>(null);
 
-const SearchContextProvider = ({ children }) => {
+const SearchContextProvider = ({ children }: any) => {
   const [query, setQuery] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
-  const searchInputRef = useRef(null);
+  const [filteredData, setFilteredData] = useState<any[]>([]);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  console.log(filteredData);
+  console.log(searchInputRef);
+  console.log(query);
+  console.log(setQuery);
+  console.log(setFilteredData)
 
   return (
     <SearchContext.Provider
@@ -15,8 +22,10 @@ const SearchContextProvider = ({ children }) => {
         filteredData,
         setFilteredData,
         searchInputRef,
-      }}>
+      }}
+    >
       {children}
+
     </SearchContext.Provider>
   );
 };
@@ -30,3 +39,4 @@ export const useSearch = () => {
   }
   return context;
 };
+

@@ -51,6 +51,9 @@ export default function Cards({ item, handleBookmark, isBookmarked }: any) {
                 <li className='flex items-center'><span className='bullet bg-greyish-blue' />{item.rating}</li>
             </ul>
             <h1 className='font-semibold'>{item.title}</h1>
+            {/* {trailers.map((trailer) => (
+              <iframe width="560" height="315" src={`https://www.youtube.com/embed/${trailer.key}`} frameborder="0" allowfullscreen></iframe>
+            ))} */}
             <div>
 
             </div>

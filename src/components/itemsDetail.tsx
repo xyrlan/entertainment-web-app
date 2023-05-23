@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -17,18 +17,35 @@ import {
 
 
 
-
 const ItemDetail = ({ item }: any) => {
     const router = useRouter();
     const [showAllCast, setShowAllCast] = useState(false);
 
-    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+    const [selectedVideo, setSelectedVideo] = useState<string | null>('');
 
-    console.log(isVideoPlaying);
+    const videoRef = useRef<HTMLDivElement | null>(null);
 
-    const handleVideoClick = () => {
-        setIsVideoPlaying(true);
+    const handleVideoClick = (videoId: string) => {
+        setSelectedVideo(videoId);
     };
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (selectedVideo && videoRef.current && videoRef.current.contains(event.target as Node)) {
+            setSelectedVideo('')
+        }
+    };
+    console.log(videoRef.current);
+    console.log(selectedVideo);
+
+    useEffect(() => {
+
+        document.addEventListener('click', handleClickOutside);
+
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [selectedVideo]);
 
     const handleGoBack = () => {
         router.back();
@@ -65,116 +82,143 @@ const ItemDetail = ({ item }: any) => {
     };
 
     return (
-        
-            <section className='mt-4 xl:ml-8 xl:mt-16 p-2'>
-                <div className=' text-white flex flex-col justify-center gap-6 pb-10 md:grid md:grid-cols-[1fr,_2fr] md:gap-8 md:max-w-screen-xl md:mx-auto'>
-                    <div>
-                        <button
-                            className='text-white text-left mb-6 hover:text-red hover:opacity-100 transition-all hover:scale-[1.1]'
-                            onClick={handleGoBack}>
-                            <FontAwesomeIcon className='pr-2' icon={faArrowLeft} size='xl' />
-                        </button>
-                        {isVideoPlaying ? (
-                            <div className=' video-overlay'>
-                                <iframe className='mb-4 w-full max-md:w-[80%] video-iframe' width="560" height="315" src={`https://www.youtube.com/embed/${item.trailers}`}
-                                ></iframe>
+
+        <section id='animation-title' className='mt-4 xl:ml-8 xl:mr-8 xl:mt-16 p-2'>
+            <button
+                className='text-white text-left mb-6 hover:text-red hover:opacity-100 transition-all hover:scale-[1.1]'
+                onClick={handleGoBack}>
+                <FontAwesomeIcon className='pr-2' icon={faArrowLeft} size='xl' />
+            </button>
+            {selectedVideo ? (
+                <div className={`video-overlay duration-1000 ${selectedVideo ? 'opacity-100' : 'opacity-0'}`} ref={videoRef}>
+                    <iframe
+                        allowFullScreen
+                        className='select-none mb-4 video-iframe w-full h-full max-h-[80%] max-w-[80%]'
+                        src={`https://www.youtube.com/embed/${selectedVideo}`}
+                    ></iframe>
+                </div>
+            ) : (
+                <div className=" xl:pl-14 flex justify-start flex-nowrap sm:gap-10 w-full max-sm:gap-2
+                overflow-x-auto touch-auto scrollbar-track-transparent scroll-smooth scrollbar-thumb-semi-dark-blue scrollbar-thin scroll-pl-3 snap-x">
+                    {item.trailer.map((trailers: string, index: number) => (
+                        <div
+                            key={trailers}
+                            onClick={() => handleVideoClick(trailers)}
+                            className='cursor-pointer'>
+                            <div className='shadow-sm hover:shadow-none shadow-red hover:bg-red text-white hover:text-dark-blue duration-300 mb-5 w-fit py-1 px-2 rounded-xl font-extralight'>
+                                Trailer{item.trailer.length - index}
                             </div>
-                        ) : (
-                            <div className="flex justify-center" onClick={handleVideoClick}>
-                                <iframe onClick={handleVideoClick}
-                                    className='mb-4 w-full max-md:w-[80%] max-md:h-[200px] video-iframe shadow-lg shadow-black' width="560" height="315" src={`https://www.youtube.com/embed/${item.trailers}`}></iframe>
-                            </div>
-                        )}
-                        <img
-                            className='shadow-xl shadow-black mx-auto rounded-lg md:mx-0 max-w-[240px] md:max-w-full'
-                            src={item.poster}
-                            alt={item.title}
-                        />
+                        </div>
+                    ))}
+                </div>
+            )}
+            <div className=' text-white flex flex-col justify-center gap-6 pb-10 md:grid md:grid-cols-[1fr,_2fr] md:gap-8 md:max-w-screen-xl md:mx-auto'>
+                <div>
+                    <img
+                        className='shadow-xl shadow-black mx-auto rounded-lg  md:mx-0 max-w-[240px] md:max-w-full'
+                        src={item.poster}
+                        alt={item.title}
+                    />
+                </div>
+
+                <div className='flex flex-col gap-4'>
+
+                    <h1 className='text-3xl text-center md:text-left md:text-4xl xl:text-5xl'>
+                        {item.title}
+                    </h1>
+                    <h2 className='text-greyish-blue font-light text-center md:text-left md:text-lg'>
+                        {item.tagline}
+                    </h2>
+                    <div className='flex flex-col md:flex-row gap-4 items-center mb-4 md:mb-0'>
+                        <p className='text-4xl'>{parseFloat(`${ratingOutOf5}`).toFixed(1)}</p>
+                        <div className='flex text-xl text-red'>
+                            {generateStars(ratingOutOf5)}{' '}
+                        </div>
                     </div>
-
-                    <div className='flex flex-col gap-4 md:pt-12'>
-
-                        <h1 className='text-3xl text-center md:text-left md:text-4xl xl:text-5xl'>
-                            {item.title}
-                        </h1>
-                        <h2 className='opacity-50 font-light text-center md:text-left md:text-lg'>
-                            {item.tagline}
-                        </h2>
-                        <div className='flex flex-col md:flex-row gap-4 items-center mb-4 md:mb-0'>
-                            <p className='text-4xl'>{parseFloat(`${ratingOutOf5}`).toFixed(1)}</p>
-                            <div className='flex text-xl text-red'>
-                                {generateStars(ratingOutOf5)}{' '}
+                    <div className='flex gap-12 max-sm:gap-8 mx-auto md:mx-0 items-center text-sm md:text-base'>
+                        <div className='flex flex-col gap-1 items-center'>
+                            <p className='text-greyish-blue'>Length</p>
+                            <p>{item.length ? item.length + ' min.' : 'N/A'}</p>
+                        </div>
+                        <div className='flex flex-col gap-1 items-center'>
+                            <p className='text-greyish-blue'>Year</p>
+                            <p>{item.year}</p>
+                        </div>
+                        <div className='flex flex-col gap-1 items-center'>
+                            <p className='text-greyish-blue'>Language</p>
+                            <p className='uppercase'>{item.language}</p>
+                        </div>
+                        <div className='flex flex-col gap-1 items-center'>
+                            <p className='text-greyish-blue'>Status</p>
+                            <p>{item.status}</p>
+                        </div>
+                    </div>
+                    <div className='flex flex-col gap-4'>
+                        <div className='flex flex-col gap-1'>
+                            <p className='text-xl mb-1 text-greyish-blue'>Genres</p>
+                            <div className='flex gap-2 flex-wrap text-sm md:text-base'>
+                                {item.genres.map((genre: any, index: number) => (
+                                    <span
+                                        key={index}
+                                        className='cursor-pointer shadow-sm hover:shadow-none shadow-red hover:bg-red text-white hover:text-dark-blue duration-300 py-1 px-2 rounded-xl text-sm tracking-wider '>
+                                        {genre}
+                                    </span>
+                                ))}
                             </div>
                         </div>
-                        <div className='flex gap-12 mx-auto md:mx-0 items-center text-sm md:text-base'>
-                            <div className='flex flex-col gap-1 items-center'>
-                                <p className='opacity-50'>Length</p>
-                                <p>{item.length ? item.length + ' min.' : 'N/A'}</p>
-                            </div>
-                            <div className='flex flex-col gap-1 items-center'>
-                                <p className='opacity-50'>Year</p>
-                                <p>{item.year}</p>
-                            </div>
-                            <div className='flex flex-col gap-1 items-center'>
-                                <p className='opacity-50'>Language</p>
-                                <p className='uppercase'>{item.language}</p>
-                            </div>
-                            <div className='flex flex-col gap-1 items-center'>
-                                <p className='opacity-50'>Status</p>
-                                <p>{item.status}</p>
+                        <div className='grid grid-flow-row '>
+                            <h6 className='text-xl mb-1 text-greyish-blue'>Synopsis</h6>
+                            <p className='font-extralight'>{item.synopsis}</p>
+                        </div>
+
+                        <div>
+                            <h6 className='text-xl mb-2 text-greyish-blue'>Production Companies</h6>
+                            <div className='flex justify-start gap-2 flex-wrap pt-2'>
+                                {item.prodcompanies.map((companies: any) => (
+                                    <div className='flex items-center gap-2'>
+                                        <img className='h-10 mb-2' src={`https://image.tmdb.org/t/p/original${companies.logo_path}`} alt='' />
+                                        {/* <div>{companies.name}</div> */}
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                        <div className='flex flex-col gap-4'>
-                            <div className='flex flex-col gap-1'>
-                                <p className='font-lg mb-1'>Genres</p>
-                                <div className='flex gap-2 flex-wrap text-sm md:text-base'>
-                                    {item.genres.map((genre: any, index: number) => (
-                                        <span
-                                            key={index}
-                                            className='bg-white py-1 px-2 rounded-xl text-sm tracking-wider text-black'>
-                                            {genre}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className=''>
-                                <h6 className='font-lg mb-1'>Synopsis</h6>
-                                <p className='font-light'>{item.synopsis}</p>
-                            </div>
-                            <div className='flex flex-col gap-1 text-sm md:text-base'>
-                                <p className='text-lg mb-1'>Cast</p>
-                                <div className='flex gap-2 flex-wrap'>
-                                    {item.cast.map((actor: any, index: number) => {
-                                        if (!showAllCast && index >= 10) return null;
-                                        if (showAllCast && index > 15) return null;
+                        <div className='flex flex-col text-sm md:text-base'>
+                            <p className='text-greyish-blue text-xl mb-1'>Cast</p>
+                            <div className='flex justify-start w-full gap-3 max-sm:gap-0 flex-wrap'>
+                                {item.cast.map((actor: any, index: number) => {
+                                    if (!showAllCast && index >= 8) return null;
+                                    if (showAllCast && index > 15) return null;
 
-                                        return (
-                                            <div key={actor.id} className='flex flex-col justify-center items-center max-w-full'>
-                                            <img className='w-20 h-24' src={`https://image.tmdb.org/t/p/original${actor.profile_path}`} alt={actor.name} />
-                                            <span
-                                                key={index}
-                                                className='bg-semiDarkBlue text-grayishBlue tracking-wider rounded-lg px-2 py-1 text-sm'>
-                                                {actor.name}
-                                            </span>
-                                            <span
-                                                key={index}
-                                                className='bg-semiDarkBlue text-grayishBlue tracking-wider rounded-lg px-2 py-1 text-sm'>
-                                                {actor.character}
-                                            </span>
+                                    return (
+                                        <div id='animation-title' key={actor.id} className='grid grid-flow-row max-w-[144px] justify-items-center max-md:scale-75 shadow-lg shadow-black rounded-xl'>
+                                            <img className='w-36 h-48 max-lg:h-40 max-md:h-36 rounded-3xl' src={`https://image.tmdb.org/t/p/original${actor.profile_path}`} alt='image not fount' />
+                                            <div className='text-center flex flex-col flex-wrap'>
+                                                <span
+                                                    key={index}
+                                                    className='text-greyish-blue text-center bg-semiDarkBlue text-grayishBlue tracking-wider rounded-lg px-2 pt-1 text-sm'>
+                                                    {actor.name}
+                                                </span>
+                                                <span
+                                                    key={index}
+                                                    className='text-red flex justify-center items-center text-center bg-semiDarkBlue text-grayishBlue tracking-wider text-sm bg-semi-dark-blue py-1 w-full rounded-xl'>
+                                                    {actor.character}
+                                                </span>
                                             </div>
-                                        );
-                                    })}
-                                    <button
-                                        className='mt-2 text-white text-sm underline opacity-50'
-                                        onClick={handleShowMoreCast}>
-                                        {showAllCast ? 'Show Less' : 'Show More...'}
-                                    </button>
-                                </div>
+                                        </div>
+                                    );
+                                })}
+
                             </div>
+                            <button
+                                className='mt-2 text-white text-sm underline opacity-50'
+                                onClick={handleShowMoreCast}>
+                                {showAllCast ? 'Show Less' : 'Show More...'}
+                            </button>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
     );
 };
 

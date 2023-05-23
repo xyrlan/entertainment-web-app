@@ -5,7 +5,7 @@ import ItemDetail from '@/components/itemsDetail';
 
 
 export default function Page({ params }: { params: any }) {
-  console.log(params)
+
   const [item, setItem] = useState<{
         title: any;
         poster: string;
@@ -22,15 +22,13 @@ export default function Page({ params }: { params: any }) {
 
   useEffect(() => {
     async function fetchItem () {
-      console.log('olaolaolaola')
-      console.log(params)
       const item = await fetchItemDetails(params.id, 'Movie');
       setItem(item)
     }
     fetchItem()
   }, []);
 
-  console.log(item)
+ 
   return (
     <div>
       <head>

@@ -1,3 +1,5 @@
+import { boolean } from "zod";
+
 const TMDB_IMAGE_ENDPOINT = 'https://image.tmdb.org/t/p/original';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_API_KEY = '94336ccdc9e2add3bab1e3dc33dc881a';
@@ -8,7 +10,7 @@ const fetchData = async (url: string) => {
     throw new Error(`Failed to fetch data: ${response.status}`);
   }
   return await response.json();
-  
+
 };
 
 interface ProcessedItem {
@@ -41,7 +43,7 @@ const processData = (results: any[], requireBackdrop = false): ProcessedItem[] =
     rating: item.adult ? 'Adult' : 'E',
     genreIds: item.genre_ids,
     vote_average: item.vote_average,
-    
+
   }));
 };
 
@@ -197,6 +199,16 @@ const fetchItemCredits = async (id: string, itemType: string) => {
   return creditsData.cast.map((actor: any) => actor);
 };
 
+const fetchTrailers = async (id: string, itemType: string) => {
+  const trailersUrl = buildUrl(`/${itemType}/${id}/videos`, new URLSearchParams());
+  const trailersData = await fetchData(trailersUrl);
+  const filteredTrailers = trailersData.results.filter((trailer: any) => trailer.type === "Trailer" && trailer.official === true );
+  return filteredTrailers.map((trailer: any) => trailer.key);
+
+}
+
+
+
 // export interface Item {
 //   title: string;
 //   poster: string;
@@ -208,7 +220,7 @@ const fetchItemCredits = async (id: string, itemType: string) => {
 //   genres: string[];
 //   tagline: string;
 //   status: string;
-  
+
 // }
 
 export const fetchItemDetails = async (id: string, category: any) => {
@@ -217,10 +229,14 @@ export const fetchItemDetails = async (id: string, category: any) => {
   const detailsUrl = buildUrl(`/${itemType}/${id}`, new URLSearchParams());
   const detailsData = await fetchData(detailsUrl);
   const cast = await fetchItemCredits(id, itemType);
+  const trailer = await fetchTrailers(id, itemType);
   const trailersUrl = buildUrl(`/${itemType}/${id}/videos`, new URLSearchParams());
-  const trailersData = await fetchData(trailersUrl);
-  console.log(trailersUrl);
-  console.log(trailersData);
+  const trailersData = await fetchData(trailersUrl)
+
+  console.log(detailsData)
+  console.log(trailersData)
+  console.log(trailer)
+  console.log(trailersData)
   console.log(cast)
 
   const item = {
@@ -238,7 +254,8 @@ export const fetchItemDetails = async (id: string, category: any) => {
     status: detailsData.status,
     profileimage: `${TMDB_IMAGE_ENDPOINT}${cast.profile_path}`,
     cast: cast,
-    trailers: trailersData.key,
+    trailer: trailer,
+    prodcompanies: detailsData.production_companies,
 
 
   };

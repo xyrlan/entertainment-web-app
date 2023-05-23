@@ -64,7 +64,7 @@ export default function LogInForm() {
                 </span>
             </div>
 
-            <button className="w-full h-12 bg-red rounded-lg text-base hover:bg-white hover:text-dark-blue" type="submit">
+            <button className="w-full h-12 bg-red rounded-lg text-base hover:bg-white hover:text-dark-blue duration-300" type="submit">
                 Login to your account
             </button>
         </form>
