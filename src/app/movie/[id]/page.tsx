@@ -1,8 +1,8 @@
 "use client"
-import { Metadata, ResolvingMetadata } from 'next';
 import { fetchItemDetails } from '@/infra/tmdb';
 import { useEffect, useState } from 'react';
 import ItemDetail from '@/components/itemsDetail';
+
 
 export default function Page({ params }: { params: any }) {
   console.log(params)
@@ -43,10 +43,3 @@ export default function Page({ params }: { params: any }) {
   );
 }
 
-export async function generateMetadata(
-  { params, searchParams }: any,
-  parent: ResolvingMetadata,
-  ): Promise<any> {
-  // read route params
-  return { props: {} };
-}
