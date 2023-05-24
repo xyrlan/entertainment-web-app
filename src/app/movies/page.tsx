@@ -1,6 +1,5 @@
 "use client"
-import React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Navbar from '@/components/Navbar';
 
@@ -13,6 +12,7 @@ import { SearchContext } from '../context/searchContext';
 import { BookmarksProvider } from '../context/bookmarksProvider';
 
 import useFetchGenreMovies from '@/hook/useFetchGenreMovies';
+import { fetchGenreMovies } from '@/infra/tmdb';
 
 
 
@@ -42,12 +42,11 @@ const genres = [
 export default function Movies() {
   const { bookmarks, handleBookmark } = BookmarksProvider();
   const { query, filteredData } = useContext(SearchContext);
-  const genreMovies = genres.map((genre) => useFetchGenreMovies(genre.id));
+  const { genreMovies } = useFetchGenreMovies(genres.map((item) => item.id))
 
   return (
     <>
-
-
+    
       <Navbar />
 
       <main className='max-lg:px-8 lg:pl-40 max-sm:px-2 lg:pr-8 z-10'>
@@ -57,18 +56,18 @@ export default function Movies() {
         {!query && (
           <>
 
-            
+
             {genreMovies.map((items: any, index: number) => (
-            <CaroselDeGeneros
-              key={genres[index].id}
-              title={genres[index].name}
-              items={items}
-              bookmarks={bookmarks}
-              handleBookmark={handleBookmark}
-              
+              <CaroselDeGeneros
+                key={genres[index].id}
+                title={genres[index].name}
+                items={items}
+                bookmarks={bookmarks}
+                handleBookmark={handleBookmark}
+
               />
-              
-              ))}
+
+            ))}
 
 
           </>

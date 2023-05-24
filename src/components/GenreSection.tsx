@@ -2,7 +2,7 @@ import CaroselItems from "./CaroselItems";
 
 
 const GenreSection = ({ title, items, bookmarks, handleBookmark }:{
-  title: string
+  title: string | undefined
   items: any[]
   bookmarks: any[]
   handleBookmark: (item: any) => void

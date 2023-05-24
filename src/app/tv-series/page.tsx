@@ -1,6 +1,8 @@
 "use client"
 import React from 'react';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
+
+
 import Navbar from '@/components/Navbar';
 import CaroselDeGeneros from '@/components/GenreSection';
 import SearchBar from '@/components/Searchbar';
@@ -8,7 +10,6 @@ import FilteredData from '@/components/FilteredData';
 
 import { SearchContext } from '../context/searchContext';
 import { BookmarksProvider } from '../context/bookmarksProvider';
-
 
 import { fetchCurrentlyAiringShows } from '@/infra/tmdb';
 import useFetchGenreShows from '@/hook/useFetchGenreShows';
@@ -35,14 +36,11 @@ const genres = [
 ];
 
 
-export default function Movies() {
+export default function Shows() {
   const { bookmarks, handleBookmark } = BookmarksProvider();
   const { query, filteredData } = useContext(SearchContext);
   const [airingShows, setAiringShows] = useState<any[]>([]);
-  const [isLoadingUpcoming, setIsLoadingUpcoming] = useState(true);
-  const [isLoadingTopRated, setIsLoadingTopRated] = useState(true);
-  const genreShows = genres.map((genre) => useFetchGenreShows(genre.id));
-
+  const { genreShows } = useFetchGenreShows(genres.map((item) => item.id))
   useEffect(() => {
     const getAiringShows = async () => {
       try {
@@ -56,7 +54,6 @@ export default function Movies() {
     };
     getAiringShows();
   }, []);
-
 
 
   return (
@@ -84,10 +81,10 @@ export default function Movies() {
                 title={genres[index].name}
                 items={items}
                 bookmarks={bookmarks}
-                handleBookmark={handleBookmark} />
+                handleBookmark={handleBookmark}
+
+              />
             ))}
-
-
           </>
         )}
       </main>

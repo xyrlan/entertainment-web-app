@@ -25,7 +25,7 @@ export default function Page({ params }: { params: any }) {
       setItem(item)
     }
     fetchItem()
-  }, []);
+  }, [params.id]);
 
   return (
     <div>

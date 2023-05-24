@@ -2,8 +2,6 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import Navbar from '@/components/Navbar';
-import { msArrayOutTrend } from '@/infra/movies';
-import { msArraysModified } from '@/infra/movies';
 import SearchBar from '@/components/Searchbar';
 import FilteredData from '@/components/FilteredData';
 import { SearchContext } from './context/searchContext';
@@ -24,10 +22,6 @@ export default function Home() {
   const { query, filteredData }: any = useContext(SearchContext);
 
   const { bookmarks, handleBookmark } = BookmarksProvider();
-
-  console.log(bookmarks);
-
-  console.log(localStorage.getItem('bookmarks'));
 
   const handleSearch = (query: any) => {
     setSearchQuery(query);

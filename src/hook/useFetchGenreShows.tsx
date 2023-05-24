@@ -1,25 +1,34 @@
+
 import { useState, useEffect } from 'react';
 import { fetchGenreShows } from '@/infra/tmdb';
 
 type GenreId = number;
 
+interface GenreShowsResult {
+  genreShows: any[][]
+}
 
-const useFetchGenreShows = (genreId: GenreId): any[] => {
-    const [shows, setShows] = useState<any[]>([]);
+const useFetchGenreShows = (genreIds: GenreId[]): GenreShowsResult => {
+  const [genreShows, setGenreShows] = useState<any[][]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const genreShows: any = await fetchGenreShows(genreId);
-        setShows(genreShows.filter((shows: any) => shows.vote_average > 7));
+        var newGenresShows = []
+        for (let i = 0; i < genreIds.length; i++) {
+          const genreShowsNew: any[] = await fetchGenreShows(genreIds[i]);
+          const Shows = genreShowsNew.slice(0, 20)
+          newGenresShows.push(Shows)
+        }
+        setGenreShows(newGenresShows)
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, [genreId]);
+  }, [genreIds]);
 
-  return shows;
+  return { genreShows };
 };
 
 export default useFetchGenreShows;
