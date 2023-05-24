@@ -17,7 +17,7 @@ interface Movie {
 }
 
 
-const TrendingCarousel = ({ topitem , handleBookmark, bookmarks, isBookmarked}: any) => {
+const CaroselItems = ({ topitem , handleBookmark, bookmarks, isBookmarked}: any) => {
     const router = useRouter();
 
     const handlePlayClick = (category: string, id: number) => {
@@ -30,7 +30,7 @@ const TrendingCarousel = ({ topitem , handleBookmark, bookmarks, isBookmarked}: 
     const MScontent = (topitem: Movie) => (
 
 
-            <div className='snap-start h-[230px] max-lg:h-[210px] max-sm:h-[180px] bg-cover lg:min-w-[400px] max-lg:min-w-[360px] max-md:min-w-[330px] max-sm:max-w-xs rounded-lg relative ' key={topitem.title} style={{ backgroundImage: `url(${topitem.image})` }}>
+            <div id='animation-title' className='snap-start h-[230px] max-lg:h-[210px] max-sm:h-[180px] bg-cover lg:min-w-[400px] max-lg:min-w-[360px] max-md:min-w-[330px] max-sm:max-w-xs rounded-lg relative group duration-300 ' key={topitem.title} style={{ backgroundImage: `url(${topitem.image})` }}>
 
                 <div className='h-full w-full flex justify-center items-center hover:bg-black hover:bg-opacity-40 transition-all duration-500 group ease-out relative rounded-lg p-4'>
 
@@ -43,7 +43,7 @@ const TrendingCarousel = ({ topitem , handleBookmark, bookmarks, isBookmarked}: 
 
                     <div 
                     onClick={() => { handleBookmark(topitem) }}
-                    className={`rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in ${isBookmarked ? 'fill-white hover:stroke-white hover:bg-black' : ''
+                    className={`group-hover:opacity-100 flex opacity-0 rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in ${isBookmarked ? 'fill-white hover:stroke-white hover:bg-black' : ''
                 }`}
                         >
                         <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" stroke-width="1.5" /></svg>
@@ -61,7 +61,7 @@ const TrendingCarousel = ({ topitem , handleBookmark, bookmarks, isBookmarked}: 
                             </li>
                             <li className='flex items-center'><span className='bullet bg-greyish-blue' />{topitem.rating}</li>
                         </ul>
-                        <h1 className='text-xl font-semibold'>{topitem.title}</h1>
+                        <h1 className='text-xl font-semibold text-white'>{topitem.title}</h1>
                     </div>
                 </div>
             </div>
@@ -77,4 +77,4 @@ return (
     );
 };
 
-export default TrendingCarousel;
+export default CaroselItems;

@@ -1,9 +1,7 @@
 "use client"
 import React from 'react';
-import { useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useContext } from 'react';
 import Navbar from '@/components/Navbar';
-import TrendingCarousel from '@/components/carrosselmovies';
 import { msArrayOutTrend } from '@/infra/movies';
 import { msArraysModified } from '@/infra/movies';
 import SearchBar from '@/components/Searchbar';
@@ -17,6 +15,7 @@ import { BookmarksProvider } from './context/bookmarksProvider';
 import useFetchData from '@/hook/useFetchData';
 import { fetchPopularMovies, fetchPopularShows, fetchTopRatedMovies, fetchTopRatedShows } from '@/infra/tmdb';
 import Cards from '@/components/Cards';
+import CaroselItems from '@/components/CaroselItems';
 
 
 export default function Home() {
@@ -26,6 +25,10 @@ export default function Home() {
 
   const { bookmarks, handleBookmark } = BookmarksProvider();
 
+  console.log(bookmarks);
+  
+  console.log(localStorage.getItem('bookmarks'));
+  
   const handleSearch = (query: any) => {
     setSearchQuery(query);
   };
@@ -78,7 +81,7 @@ export default function Home() {
 
         <div className='flex justify-start flex-nowrap sm:gap-10 w-full max-sm:gap-2 scrollbar' dir='ltr' >
           {topitems.map((topitem, index) => (
-            <TrendingCarousel key={topitem.id}
+            <CaroselItems key={topitem.id}
               topitem={topitem}
               handleBookmark={handleBookmark}
               isBookmarked={bookmarks.some((bookmark: any | null) => bookmark.id === topitem.id)}
@@ -122,7 +125,6 @@ export default function Home() {
               {renderMS('Popular Series', series, 'Top Rated Series', topseries)}
             </>
           )}
-
         </main>
 
 

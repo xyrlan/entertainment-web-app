@@ -1,24 +1,25 @@
-// import { useState, useEffect } from 'react';
-// import { fetchGenreMovies } from '@/infra/tmdb';
+import { useState, useEffect } from 'react';
+import { fetchGenreMovies } from '@/infra/tmdb';
+
+type GenreId = number;
 
 
+const useFetchGenreMovies = (genreId: GenreId): any[] => {
+  const [movies, setMovies] = useState<any[]>([]);
 
-// const useFetchGenreMovies = (genreId) => {
-//   const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const genreMovies: any[] = await fetchGenreMovies(genreId);
+        setMovies(genreMovies.slice(0, 20));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [genreId]);
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const genreMovies = await fetchGenreMovies(genreId);
-//         setMovies(genreMovies.slice(0, 20));
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-//     fetchData();
-//   }, [genreId]);
+  return movies;
+};
 
-//   return movies;
-// };
-
-// export default useFetchGenreMovies;
+export default useFetchGenreMovies;

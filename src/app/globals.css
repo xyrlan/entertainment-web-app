@@ -114,3 +114,7 @@ body {
 }
 
 
+#animation-title-delayed {
+  animation: fadeIn 4s ease-in-out;
+}
+

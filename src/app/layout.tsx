@@ -23,7 +23,7 @@ export default function RootLayout({
       <SearchContextProvider>
         <div
           className={`xl:grid xl:grid-cols-[96px_minmax(1185px,_1fr)]`}>
-          <body className='font-outfit'>
+          <body className='font-outfit text-white'>
             {children}
           </body>
 

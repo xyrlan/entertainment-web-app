@@ -64,6 +64,7 @@ const fetchGenreItems = async (path: string, genreId: number) => {
 
 export const search = async (query: string) => {
   const url = buildUrl('/search/multi', new URLSearchParams({ query }));
+
   const data = await fetchData(url);
   const filteredData = data.results.filter(
     (item: any) => item.backdrop_path !== null && item.backdrop_path !== undefined
@@ -76,12 +77,6 @@ export const fetchTrendingAllWeek = async () => {
   const data = await fetchData(url);
   return processData(data.results);
 };
-
-// export const fetchMoviesTrailer = async () => {
-//     const url = buildUrl(`movie/${id}/videos`, new URLSearchParams());
-//     const data = await fetchData(url);
-//     return processData(data.results);
-// }
 
 
 const fetchMoviesByPath = async (

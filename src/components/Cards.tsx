@@ -14,7 +14,7 @@ export default function Cards({ item, handleBookmark, isBookmarked }: any) {
     };
 
     return (
-        <div className={`rounded-lg w-full mb-8 duration-500`} key={item.title}>
+        <div className={`group rounded-lg w-full mb-8 duration-500`} key={item.title}>
 
             <div className={`flex justify-center items-center rounded-lg bg-cover w-full lg:h-[174px] max-lg:h-[150px] cursor-pointer relative  duration-500 ease-out`} style={{ backgroundImage: `url(${item.image})` }}>
 
@@ -29,7 +29,7 @@ export default function Cards({ item, handleBookmark, isBookmarked }: any) {
 
                 </div>
 
-                <div id='bookmark' className={`rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in  ${isBookmarked ? 'fill-white hover:stroke-white hover:bg-black' : ''
+                <div id='bookmark' className={`group-hover:opacity-100 opacity-0 rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in  ${isBookmarked ? 'fill-white hover:stroke-white hover:bg-black' : ''
                     }`}
                     onClick={() => { handleBookmark(item) }}>
 

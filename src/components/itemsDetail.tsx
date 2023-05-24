@@ -87,29 +87,7 @@ const ItemDetail = ({ item }: any) => {
                 onClick={handleGoBack}>
                 <FontAwesomeIcon className='pr-2' icon={faArrowLeft} size='xl' />
             </button>
-            {selectedVideo ? (
-                <div key={selectedVideo} className={`video-overlay duration-1000 ${selectedVideo ? 'opacity-100' : 'opacity-0'}`} ref={videoRef}>
-                    <iframe
-                        allowFullScreen
-                        className='select-none mb-4 video-iframe w-full h-full max-h-[80%] max-w-[80%]'
-                        src={`https://www.youtube.com/embed/${selectedVideo}`}
-                    ></iframe>
-                </div>
-            ) : (
-                <div className=" xl:pl-14 flex justify-start flex-nowrap sm:gap-10 w-full max-sm:gap-2
-                overflow-x-auto touch-auto scrollbar-track-transparent scroll-smooth scrollbar-thumb-semi-dark-blue scrollbar-thin scroll-pl-3 snap-x">
-                    {item.trailer.map((trailers: string, index: number) => (
-                        <div
-                            key={trailers}
-                            onClick={() => handleVideoClick(trailers)}
-                            className='cursor-pointer'>
-                            <div className='shadow-sm hover:shadow-none shadow-red hover:bg-red text-white hover:text-dark-blue duration-300 mb-5 w-fit py-1 px-2 rounded-xl font-extralight'>
-                                Trailer{item.trailer.length - index}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
+
             <div className=' text-white flex flex-col justify-center gap-6 pb-10 md:grid md:grid-cols-[1fr,_2fr] md:gap-8 md:max-w-screen-xl md:mx-auto'>
                 <div>
                     <img
@@ -117,6 +95,29 @@ const ItemDetail = ({ item }: any) => {
                         src={item.poster}
                         alt={item.title}
                     />
+                    {selectedVideo ? (
+                        <div key={selectedVideo} className={`z-20 video-overlay duration-1000 ${selectedVideo ? 'opacity-100' : 'opacity-0'}`} ref={videoRef}>
+                            <iframe
+                                allowFullScreen
+                                className='select-none mb-4 video-iframe w-full h-full max-h-[80%] max-w-[80%]'
+                                src={`https://www.youtube.com/embed/${selectedVideo}`}
+                            ></iframe>
+                        </div>
+                    ) : (
+                        <div className="mt-8 flex justify-start flex-nowrap sm:gap-10 w-full max-sm:gap-2
+                overflow-x-auto touch-auto scrollbar-track-transparent scroll-smooth scrollbar-thumb-semi-dark-blue scrollbar-thin scroll-pl-3 snap-x">
+                            {item.trailer.map((trailers: string, index: number) => (
+                                <div
+                                    key={trailers}
+                                    onClick={() => handleVideoClick(trailers)}
+                                    className='cursor-pointer'>
+                                    <div className='shadow-sm hover:shadow-none shadow-red hover:bg-red text-white hover:text-dark-blue duration-300 mb-5 w-fit py-1 px-2 rounded-xl font-extralight'>
+                                        Trailer{item.trailer.length - index}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 <div className='flex flex-col gap-4'>
@@ -182,7 +183,7 @@ const ItemDetail = ({ item }: any) => {
                         </div>
                         <div className='flex flex-col text-sm md:text-base'>
                             <p className='text-greyish-blue text-xl mb-1'>Cast</p>
-                            <div className='flex justify-start w-full gap-3 max-sm:gap-0 flex-wrap'>
+                            <div className='flex justify-start max-sm:justify-between w-full gap-3 max-sm:gap-0 flex-wrap'>
                                 {item.cast.map((actor: any, index: number) => {
                                     if (!showAllCast && index >= 8) return null;
                                     if (showAllCast && index > 15) return null;

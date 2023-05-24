@@ -1,93 +1,93 @@
 "use client"
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useContext } from 'react';
+
 import Navbar from '@/components/Navbar';
-import { movies } from '@/infra/movies';
+
+import CaroselDeGeneros from '@/components/GenreSection';
+
 import SearchBar from '@/components/Searchbar';
-import useBookmark from '@/hook/bookmarkHook';
+import FilteredData from '@/components/FilteredData';
+
+import { SearchContext } from '../context/searchContext';
+import { BookmarksProvider } from '../context/bookmarksProvider';
+
+import useFetchGenreMovies from '@/hook/useFetchGenreMovies';
+
+
+
+const genres = [
+  { id: 28, name: 'Action' },
+  { id: 12, name: 'Adventure' },
+  { id: 16, name: 'Animation' },
+  { id: 35, name: 'Comedy' },
+  { id: 80, name: 'Crime' },
+  { id: 99, name: 'Documentary' },
+  { id: 18, name: 'Drama' },
+  { id: 10751, name: 'Family' },
+  { id: 14, name: 'Fantasy' },
+  { id: 36, name: 'History' },
+  { id: 27, name: 'Horror' },
+  { id: 10402, name: 'Music' },
+  { id: 9648, name: 'Mystery' },
+  { id: 10749, name: 'Romance' },
+  { id: 878, name: 'Science Fiction' },
+  { id: 10770, name: 'TV Movie' },
+  { id: 53, name: 'Thriller' },
+  { id: 10752, name: 'War' },
+  { id: 37, name: 'Western' },
+];
 
 
 export default function Movies() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const { bookmarks, handleBookmark } = BookmarksProvider();
+  const { query, filteredData } = useContext(SearchContext);
+  const genreMovies = genres.map((genre) => useFetchGenreMovies(genre.id));
 
-  const { selectedMovies, handleBookmark } = useBookmark();
+  // useEffect(() => {
+  //   const getUpcomingMovies = async () => {
+  //     setIsLoadingUpcoming(true);
+  //     try {
+  //       const upcomingMovies = await fetchUpcomingMovies();
+  //       setUpcomingMovies(upcomingMovies.slice(0, 20));
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //     // setIsLoadingUpcoming(false);
+  //   };
+  //   getUpcomingMovies();
+  // }, []);
 
-  const handleSearch = (query: any) => {
-    setSearchQuery(query);
-  };
+  // console.log(upcomingMovies);
 
-
-  const filteredMovies = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-  )
   return (
     <>
-      <head>
-        <title>M&S - Movies</title>
-        <link rel='icon' type='svg' href='/images/logo.svg' />
-      </head>
-      <body className='text-white h-screen font-outfit'>
-
-        <Navbar />
-
-        <main className='max-lg:px-8 lg:pl-40 max-sm:px-2 lg:pr-8 z-10'>
-
-          <SearchBar onSearch={handleSearch} />
-
-          {filteredMovies.length >= 0 && filteredMovies.length < 11 ? (
-            <div className='my-4 font-extralight text-3xl max-md:text-xl'>
-              Found {filteredMovies.length} {filteredMovies.length === 1 ? 'result' : 'results'} for &quot;{searchQuery}&quot;
-            </div>
-          ) : null}
-
-          <h1 className={`text-2xl my-6 font-light duration-300 transition-all ${filteredMovies.length >= 0 && filteredMovies.length < 11 ? 'opacity-0 h-0 my-0' : 'opacity-100 h-full'}`}>Movies</h1>
-
-          <div className='grid grid-cols-4 w-full max-xl:grid-cols-3 max-sm:grid-cols-2 gap-x-6'>
-
-            {filteredMovies.map((movie, index) => (
-              <div className={`rounded-lg w-full mb-8 duration-500 ${searchQuery ? '' : 'opacity-100'}`} key={movie.title}>
-
-                <div className={`flex justify-center items-center rounded-lg bg-cover w-full lg:h-[174px] max-lg:h-[150px] cursor-pointer relative  duration-500 ease-out`} style={{ backgroundImage: `url(${movie.imageLarge})` }} >
-
-                  <div className='h-full w-full flex justify-center items-center bg-black bg-opacity-40 transition-all duration-500 opacity-0 hover:opacity-100 ease-out rounded-lg'>
-
-                    <div className='select-none flex items-center absolute gap-5 h-12 w-28 p-2 rounded-full bg-gray-400 hover:bg-white bg-opacity-30 fill-white hover:fill-red hover:text-red duration-300 ease-in'>
-                      <svg className='' width="30" height="30" xmlns="http://www.w3.org/2000/svg"><path d="M15 0C6.713 0 0 6.713 0 15c0 8.288 6.713 15 15 15 8.288 0 15-6.712 15-15 0-8.287-6.712-15-15-15Zm-3 21V8l9 6.5-9 6.5Z" /></svg>
-                      <p className='font-semibold'>Play</p>
-                    </div>
-
-                  </div>
-
-                  <div id='bookmark' className={`rounded-full bg-black hover:bg-white hover:bg-opacity-80 bg-opacity-40 w-8 h-8 absolute cursor-pointer right-3 top-3 flex items-center justify-center hover:stroke-black stroke-white fill-transparent duration-300 ease-in ${selectedMovies.includes(movie.title) ? 'fill-white hover:stroke-white hover:bg-black' : ''
-                    }`}
-                    onClick={() => handleBookmark(movie.title)}>
-
-                    <svg className='' width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="m10.518.75.399 12.214-5.084-4.11-4.535 4.426L.75 1.036l9.768-.285Z" stroke-width="1.5" /></svg>
-
-                  </div>
-
-                </div>
-
-                <ul className='flex items-center gap-2 sm:text-sm max-sm:text-xs text-greyish-blue mt-1 select-none max-h-5'>
-                  <li>{movie.date}</li>
-                  <li>
-                    <div className='flex items-center gap-1'>
-                      <span className='bullet bg-greyish-blue' /> {/* Estilo de marcador personalizado */}
-                      <img src={`${movie.category}`} />
-                      <p>{movie.type}</p>
-                    </div>
-                  </li>
-                  <li className='flex items-center'><span className='bullet bg-greyish-blue' />{movie.indication}</li>
-                </ul>
-                <h1 className='font-semibold'>{movie.title}</h1>
 
 
-              </div>
-            ))}
-          </div>
-        </main>
+      <Navbar />
+
+      <main className='max-lg:px-8 lg:pl-40 max-sm:px-2 lg:pr-8 z-10'>
+
+        <SearchBar currentPage='movies' />
+        {query && <FilteredData data={filteredData} />}
+        {!query && (
+          <>
+
+            
+            {genreMovies.map((items: any, index: number) => (
+            <CaroselDeGeneros
+              key={genres[index].id}
+              title={genres[index].name}
+              items={items}
+              bookmarks={bookmarks}
+              handleBookmark={handleBookmark}/>
+              ))}
 
 
-      </body>
+          </>
+        )}
+      </main>
+
     </>
   )
 }

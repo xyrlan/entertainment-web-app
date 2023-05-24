@@ -1,9 +1,9 @@
 "use client"
 import { useEffect, useState } from 'react';
 
-
 interface Bookmark {
   id: number;
+  
   // Outras propriedades do objeto Bookmark
 }
 
@@ -17,6 +17,7 @@ export const BookmarksProvider = () => {
       setBookmarks(JSON.parse(localBookmarks));
     }
   }, []);
+
 
   const handleBookmark = (item: Bookmark) => {
     setBookmarks((prevBookmarks) => {
