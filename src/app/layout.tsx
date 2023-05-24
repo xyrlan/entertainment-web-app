@@ -2,7 +2,10 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { BookmarksProvider } from './context/bookmarksProvider'
 import SearchContextProvider from './context/searchContext'
-
+import { useRouter } from 'next/navigation';
+import 'nprogress/nprogress.css';
+import { useState, useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -13,6 +16,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
   return (
 
     <html lang="en">

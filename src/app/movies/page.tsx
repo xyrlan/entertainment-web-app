@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 
 import Navbar from '@/components/Navbar';
 
@@ -46,7 +46,7 @@ export default function Movies() {
 
   return (
     <>
-    
+
       <Navbar />
 
       <main className='max-lg:px-8 lg:pl-40 max-sm:px-2 lg:pr-8 z-10'>

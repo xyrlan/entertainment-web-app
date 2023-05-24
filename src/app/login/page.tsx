@@ -18,7 +18,7 @@ export default function LogIn() {
 
                 <LogInForm  />
 
-                <p className="w-full text-center mt-6 text-sm">Don&quot;t have an account?
+                <p className="w-full text-center mt-6 text-sm">Don&apos;t have an account?
                     <Link href="/signup" className="text-red hover:text-white duration-300"> Sign up</Link>
                 </p>
 

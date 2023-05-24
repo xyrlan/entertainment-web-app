@@ -1,4 +1,4 @@
-
+import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -13,7 +13,10 @@ import {
     faStar as farFaStar,
     faStarHalfAlt,
 } from '@fortawesome/free-regular-svg-icons';
-
+import {
+    faStar as fatFaStar,
+    faFileVideo,
+} from '@fortawesome/free-regular-svg-icons';
 
 
 
@@ -91,6 +94,8 @@ const ItemDetail = ({ item }: any) => {
             <div className=' text-white flex flex-col justify-center gap-6 pb-10 md:grid md:grid-cols-[1fr,_2fr] md:gap-8 md:max-w-screen-xl md:mx-auto'>
                 <div>
                     <img
+                        width={500}
+                        height={1080}
                         className='shadow-xl shadow-black mx-auto rounded-lg  md:mx-0 max-w-[240px] md:max-w-full'
                         src={item.poster}
                         alt={item.title}
@@ -111,8 +116,9 @@ const ItemDetail = ({ item }: any) => {
                                     key={trailers}
                                     onClick={() => handleVideoClick(trailers)}
                                     className='cursor-pointer'>
-                                    <div className='shadow-sm hover:shadow-none shadow-red hover:bg-red text-white hover:text-dark-blue duration-300 mb-5 w-fit py-1 px-2 rounded-xl font-extralight'>
-                                        Trailer{item.trailer.length - index}
+                                    <div className='shadow-inner  shadow-black text-white fill-white flex gap-2 hover:fill-red hover:shadow-red hover:text-red duration-300 md:mb-5 w-fit py-1 px-2 items-center rounded-xl font-light text-md space-x-2 group'>
+                                    <svg className=' group-hover:animate-pulse' xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M18 7c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-3.333L22 17V7l-4 3.333V7zm-1.998 10H4V7h12l.001 4.999L16 12l.001.001.001 4.999z"></path></svg>
+                                         Trailer {item.trailer.length - index}
                                     </div>
                                 </div>
                             ))}
@@ -159,7 +165,7 @@ const ItemDetail = ({ item }: any) => {
                                 {item.genres.map((genre: any, index: number) => (
                                     <span
                                         key={index}
-                                        className='cursor-pointer shadow-sm hover:shadow-none shadow-red hover:bg-red text-white hover:text-dark-blue duration-300 py-1 px-2 rounded-xl text-sm tracking-wider '>
+                                        className='cursor-pointer font-normal from-greyish-blue to-transparent p-3 bg-gradient-to-b shadow-black shadow-inner hover:bg-red text-white hover:text-dark-blue duration-300 py-1 px-2 rounded-xl text-sm tracking-wider '>
                                         {genre}
                                     </span>
                                 ))}
@@ -172,7 +178,7 @@ const ItemDetail = ({ item }: any) => {
 
                         <div>
                             <h6 className='text-xl mb-2 text-greyish-blue'>Production Companies</h6>
-                            <div className='flex justify-start gap-2 flex-wrap pt-2'>
+                            <div className='flex justify-start md:gap-x-8 max-md:gap-x-2 flex-wrap from-greyish-blue to-transparent p-3 bg-gradient-to-b shadow-black shadow-inner rounded-xl hover:brightness-150 duration-500'>
                                 {item.prodcompanies.map((companies: any, index: number) => (
                                     <div key={index} className='flex items-center gap-2'>
                                         <img className='h-10 mb-2' src={`https://image.tmdb.org/t/p/original${companies.logo_path}`} alt='' />
@@ -189,17 +195,17 @@ const ItemDetail = ({ item }: any) => {
                                     if (showAllCast && index > 15) return null;
 
                                     return (
-                                        <div id='animation-title' key={actor.id} className='grid grid-flow-row max-w-[144px] justify-items-center max-md:scale-75 shadow-lg shadow-black rounded-xl'>
-                                            <img className='w-36 h-48 max-lg:h-40 max-md:h-36 rounded-3xl' src={`https://image.tmdb.org/t/p/original${actor.profile_path}`} alt='image not fount' />
+                                        <div id='animation-title' key={actor.id} className='grid grid-flow-row max-w-[144px] justify-items-center max-md:scale-75 from-greyish-blue to-transparent bg-gradient-to-b shadow-black shadow-inner rounded-xl pb-2'>
+                                            <img className='w-36 h-48 max-lg:h-40 max-md:h-36 rounded-xl shadow-black shadow' src={`https://image.tmdb.org/t/p/original${actor.profile_path}`} alt='image not fount' />
                                             <div className='text-center flex flex-col flex-wrap'>
                                                 <span
                                                     key={index}
-                                                    className='text-greyish-blue text-center bg-semiDarkBlue text-grayishBlue tracking-wider rounded-lg px-2 pt-1 text-sm'>
+                                                    className='text-white mb-1 text-center tracking-wider rounded-lg px-2 pt-1 text-sm'>
                                                     {actor.name}
                                                 </span>
                                                 <span
                                                     key={index}
-                                                    className='text-red flex justify-center items-center text-center bg-semiDarkBlue text-grayishBlue tracking-wider text-sm bg-semi-dark-blue py-1 w-full rounded-xl'>
+                                                    className='text-red flex justify-center items-center text-center tracking-wider text-sm bg-dark-blue py-1 w-full rounded-xl shadow-sm shadow-black p-1'>
                                                     {actor.character}
                                                 </span>
                                             </div>

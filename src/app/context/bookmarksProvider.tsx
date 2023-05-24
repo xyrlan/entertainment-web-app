@@ -41,8 +41,6 @@ export const BookmarksProvider = () => {
         updatedBookmarks = [...prevBookmarks, item];
       }
 
-      // Save updated bookmarks to local storage
-      localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
       return updatedBookmarks;
     });
   };
