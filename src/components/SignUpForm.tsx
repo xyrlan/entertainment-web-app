@@ -31,7 +31,6 @@ export default function SignUpForm() {
 
     localStorage.setItem('email', data.email);
     localStorage.setItem('password', data.password);
-    console.log(data);
     const email = localStorage.email;
     const name = email.split('@')[0];
     localStorage.setItem('name', name);

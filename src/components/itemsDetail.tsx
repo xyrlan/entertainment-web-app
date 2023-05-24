@@ -34,8 +34,6 @@ const ItemDetail = ({ item }: any) => {
             setSelectedVideo('')
         }
     };
-    console.log(videoRef.current);
-    console.log(selectedVideo);
 
     useEffect(() => {
 

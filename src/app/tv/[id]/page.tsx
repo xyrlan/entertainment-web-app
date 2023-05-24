@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import ItemDetail from '@/components/itemsDetail';
 
 export default function Page({ params }: { params: any }) {
-  console.log(params)
   const [item, setItem] = useState<{
         title: any;
         poster: string;
@@ -28,7 +27,6 @@ export default function Page({ params }: { params: any }) {
     fetchItem()
   }, []);
 
-  console.log(item)
   return (
     <div>
       <head>

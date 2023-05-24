@@ -207,22 +207,6 @@ const fetchTrailers = async (id: string, itemType: string) => {
 
 }
 
-
-
-// export interface Item {
-//   title: string;
-//   poster: string;
-//   length: number | null;
-//   language: string;
-//   year: string;
-//   synopsis: string;
-//   rating: number;
-//   genres: string[];
-//   tagline: string;
-//   status: string;
-
-// }
-
 export const fetchItemDetails = async (id: string, category: any) => {
   const itemType = category === 'Movie' ? 'movie' : 'tv';
 
@@ -232,12 +216,6 @@ export const fetchItemDetails = async (id: string, category: any) => {
   const trailer = await fetchTrailers(id, itemType);
   const trailersUrl = buildUrl(`/${itemType}/${id}/videos`, new URLSearchParams());
   const trailersData = await fetchData(trailersUrl)
-
-  console.log(detailsData)
-  console.log(trailersData)
-  console.log(trailer)
-  console.log(trailersData)
-  console.log(cast)
 
   const item = {
     title: detailsData.title || detailsData.name,

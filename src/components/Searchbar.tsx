@@ -22,7 +22,6 @@ export default function SearchBar({ currentPage }: any) {
         };
     }, []);
 
-    console.log(query)
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -34,7 +33,7 @@ export default function SearchBar({ currentPage }: any) {
 
         setQuery(value);
 
-        console.log(value)
+        
 
         if (value.trim() === '') {
             setFilteredData([]);
@@ -43,7 +42,7 @@ export default function SearchBar({ currentPage }: any) {
 
         try {
             const searchData = await search(value);
-            console.log(searchData);
+
             let filteredData = searchData;
             if (currentPage === 'movies') {
                 filteredData = searchData.filter((item) => item.category === 'Movie');
@@ -73,13 +72,6 @@ export default function SearchBar({ currentPage }: any) {
     } else if (currentPage === 'bookmarks') {
         placeholderText = 'Search for bookmarked shows';
     }
-
-    // const svgElement = document.querySelector('.svg-clickable');
-    // const inputElement = document.querySelector('input');
-
-    // svgElement?.addEventListener('click', function () {
-    //     inputElement?.focus();
-    // });
 
     return (
         <>

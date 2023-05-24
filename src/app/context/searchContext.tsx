@@ -8,12 +8,6 @@ const SearchContextProvider = ({ children }: any) => {
   const [filteredData, setFilteredData] = useState<any[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  console.log(filteredData);
-  console.log(searchInputRef);
-  console.log(query);
-  console.log(setQuery);
-  console.log(setFilteredData)
-
   return (
     <SearchContext.Provider
       value={{
