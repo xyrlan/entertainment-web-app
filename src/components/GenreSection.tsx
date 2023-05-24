@@ -6,6 +6,7 @@ const GenreSection = ({ title, items, bookmarks, handleBookmark }:{
   items: any[]
   bookmarks: any[]
   handleBookmark: (item: any) => void
+  
 }) => {
 
   return (
@@ -22,6 +23,7 @@ const GenreSection = ({ title, items, bookmarks, handleBookmark }:{
                 topitem={item}
                 bookmarks={bookmarks}
                 handleBookmark={handleBookmark}
+                isBookmarked={bookmarks.some((bookmark: any | null) => bookmark.id === item.id)}
               />
             ))}
           </ul>

@@ -12,12 +12,13 @@ const Bookmarks = () => {
   const { query, filteredData } = useContext(SearchContext);
 
   const bookmarkedMovies = bookmarks.filter(
-    (item) => item.category === 'Movies'
+    (item) => item.category === 'Movie'
   );
 
   const bookmarkedTVSeries = bookmarks.filter(
     (item) => item.category === 'TV Series'
   );
+  
 
   return (
     <div className='text-white h-screen font-outfit'>
@@ -40,6 +41,7 @@ const Bookmarks = () => {
                     item={item}
                     bookmarks={bookmarks}
                     handleBookmark={handleBookmark}
+                    isBookmarked={bookmarks.some((bookmark: any | null) => bookmark.id === item.id)}
                   />
                 ))}
               </ul>
@@ -54,6 +56,7 @@ const Bookmarks = () => {
                   item={item}
                   bookmarks={bookmarks}
                   handleBookmark={handleBookmark}
+                  isBookmarked={bookmarks.some((bookmark: any | null) => bookmark.id === item.id)}
                 />
               ))}
             </ul>

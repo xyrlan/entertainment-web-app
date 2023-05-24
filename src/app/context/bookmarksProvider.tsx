@@ -1,10 +1,17 @@
 "use client"
 import { useEffect, useState } from 'react';
 
-interface Bookmark {
+export interface Bookmark {
   id: number;
-  
-  // Outras propriedades do objeto Bookmark
+  title: string;
+  category: string;
+  image: string;
+  year: string;
+  rating: string;
+  genreIds: number[];
+  genreNames: string[];
+  vote_average: number;
+  trailer: string;
 }
 
 export const BookmarksProvider = () => {

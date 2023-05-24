@@ -44,22 +44,6 @@ export default function Movies() {
   const { query, filteredData } = useContext(SearchContext);
   const genreMovies = genres.map((genre) => useFetchGenreMovies(genre.id));
 
-  // useEffect(() => {
-  //   const getUpcomingMovies = async () => {
-  //     setIsLoadingUpcoming(true);
-  //     try {
-  //       const upcomingMovies = await fetchUpcomingMovies();
-  //       setUpcomingMovies(upcomingMovies.slice(0, 20));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //     // setIsLoadingUpcoming(false);
-  //   };
-  //   getUpcomingMovies();
-  // }, []);
-
-  // console.log(upcomingMovies);
-
   return (
     <>
 
@@ -80,7 +64,10 @@ export default function Movies() {
               title={genres[index].name}
               items={items}
               bookmarks={bookmarks}
-              handleBookmark={handleBookmark}/>
+              handleBookmark={handleBookmark}
+              
+              />
+              
               ))}
 
 

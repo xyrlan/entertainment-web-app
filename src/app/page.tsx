@@ -26,22 +26,12 @@ export default function Home() {
   const { bookmarks, handleBookmark } = BookmarksProvider();
 
   console.log(bookmarks);
-  
+
   console.log(localStorage.getItem('bookmarks'));
-  
+
   const handleSearch = (query: any) => {
     setSearchQuery(query);
   };
-
-  let filteredMovies = msArrayOutTrend.filter((movie) =>
-    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  if (filteredMovies.length < 20) {
-    filteredMovies = msArraysModified.filter((movie) =>
-      movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }
 
   interface Movie {
     category: string;
@@ -73,9 +63,10 @@ export default function Home() {
   const { data: topseries, isLoading: isTopSeriesLoading } =
     useFetchData(fetchTopRatedShows);
 
+
+
   const renderMS = (title: string, items: Movie[], toptitle: string, topitems: Movie[]) => (
     <>
-
       <h1 id='animation-title' className='w-full text-4xl my-6 font-light'>{toptitle}</h1>
       <div className='lg:h-[250px] max-lg:h-[230px] max-sm:h-[200px] w-full overflow-x-auto touch-auto scrollbar-track-transparent scroll-smooth scrollbar-thumb-semi-dark-blue scrollbar-thin scroll-pl-3 snap-x' dir='ltr' >
 
@@ -87,12 +78,11 @@ export default function Home() {
               isBookmarked={bookmarks.some((bookmark: any | null) => bookmark.id === topitem.id)}
             />
           ))}
-
         </div>
+        
       </div>
 
-
-      <h1 id='animation-title' className={`text-4xl my-6 font-light duration-300 transition-all ${filteredMovies.length >= 0 && filteredMovies.length < 24 ? 'opacity-0 h-0 my-0' : 'opacity-100 h-full'}`}>{title}</h1>
+      <h1 id='animation-title' className={`text-4xl my-6 font-light duration-300 transition-all`}>{title}</h1>
 
       <div className='grid grid-cols-4 w-full max-xl:grid-cols-3 max-sm:grid-cols-2 gap-x-6'>
 
@@ -106,7 +96,6 @@ export default function Home() {
 
         ))}
       </div>
-
     </>
   )
 
